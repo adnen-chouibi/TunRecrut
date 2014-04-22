@@ -1,76 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.esprit.tunRecrut.util;
-import java.sql.*;
-/**
- *
- * @author app4mob
- */
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 public class MyDBConnection {
-     private Connection myConnection;
     
-    /** Creates a new instance of MyDBConnection */
-    public MyDBConnection() {
-        
+    /**
+     * Déclaration des variables pour la connexion
+     */
+    private String url = "jdbc:mysql://localhost:3306/tun_recrut";
+    private String login = "root";
+    private String pwd = "";
+    private static MyDBConnection instance;
+    public static Connection connection;
+
+    private MyDBConnection() {
+        try {
+            connection = DriverManager.getConnection(url,login,pwd);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void init(){
-    
-       try{
-        
-        Class.forName("com.mysql.jdbc.Driver");
-        myConnection=DriverManager.getConnection(
-                "jdbc:mysql://localhost/tun_recrut","root", ""
-                );
-        }
-        catch(Exception e){
-            System.out.println("Failed to get connection");
-            e.printStackTrace();
-        }
+    public static Connection getConnection() {
+        return connection;
     }
-    
-    
-    public Connection getMyConnection(){
-        return myConnection;
+
+    public static MyDBConnection getInstance() {
+        if(instance==null)
+            instance = new MyDBConnection();
+        return instance;
     }
+
     
-    
-    public void close(ResultSet rs){
-        
-        if(rs !=null){
-            try{
-               rs.close();
-            }
-            catch(Exception e){}
-        
-        }
-    }
-    
-     public void close(java.sql.Statement stmt){
-        
-        if(stmt !=null){
-            try{
-               stmt.close();
-            }
-            catch(Exception e){}
-        
-        }
-    }
-     
-  public void destroy(){
-  
-    if(myConnection !=null){
-    
-         try{
-               myConnection.close();
-            }
-            catch(Exception e){}
-        
-        
-    }
-  }
 }

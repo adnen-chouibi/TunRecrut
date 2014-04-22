@@ -70,6 +70,10 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     private Region regionId;
 
+    @Basic(optional = false)
+    @Column(name = "region_id")
+    private String region_id;
+    
     public User() {
     }
 
@@ -77,11 +81,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String type, String emailAddress, String password) {
+    public User(Integer id, String type, String emailAddress) {
         this.id = id;
         this.type = type;
         this.emailAddress = emailAddress;
-        this.password = password;
+        //this.password = password;
     }
 
     public Integer getId() {
@@ -186,6 +190,10 @@ public class User implements Serializable {
 
     public void setRegionId(Region regionId) {
         this.regionId = regionId;
+    }
+    
+    public void setRegionId(String regionId) {
+        this.region_id = regionId;
     }
 
     @Override
