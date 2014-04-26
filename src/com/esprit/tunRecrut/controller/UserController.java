@@ -9,6 +9,7 @@ import com.esprit.tunRecrut.dao.UserDAO;
 import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.ui.CandidatUI;
 import com.esprit.tunRecrut.ui.LoginUI;
+import com.esprit.tunRecrut.util.Session;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -24,9 +25,11 @@ public class UserController {
 
     public void authentificationAction(User user, JFrame login_ui) {
         UserDAO uDao = new UserDAO();
+        Session session = new Session();
         user = uDao.findUserByEmailAndPassword(user.getEmailAddress(), user.getPassword());
         if (user != null) {
             System.out.println("user connecté avec success");
+            session.setUser(user);
             login_ui.setVisible(false);
             if (user.getType() == 1) {
                 CandidatUI candidat_ui = new CandidatUI();
@@ -35,8 +38,6 @@ public class UserController {
                 
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
-                // Interface_User user_interface = new User_Connexion();
-                //user_interface.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");

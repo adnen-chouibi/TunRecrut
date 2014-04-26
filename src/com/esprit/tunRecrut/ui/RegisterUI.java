@@ -366,7 +366,6 @@ public final class RegisterUI extends javax.swing.JFrame {
        user.setRegionId(region);
 
         // }
-         System.out.println("password--:"+password.getText());
         UserController user_controller = new UserController();
         user_controller.RegisterAction(user);
     }//GEN-LAST:event_jButton1ActionPerformed

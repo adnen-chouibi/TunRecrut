@@ -6,6 +6,8 @@
 
 package com.esprit.tunRecrut.ui;
 
+import com.esprit.tunRecrut.util.Session;
+
 /**
  *
  * @author Haithem
@@ -17,6 +19,9 @@ public class CandidatUI extends javax.swing.JFrame {
      */
     public CandidatUI() {
         initComponents();
+        Session session = new Session();
+        System.out.println(session.getUser().getFirstName());
+        user.setText(session.getUser().getFirstName());
     }
 
     /**
@@ -28,7 +33,7 @@ public class CandidatUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        user = new javax.swing.JLabel();
         use_home_label = new javax.swing.JLabel();
         goTolProfilejButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -36,7 +41,7 @@ public class CandidatUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Welcome User");
+        user.setText("Welcome User");
 
         goTolProfilejButton.setText("Mon Profil");
 
@@ -62,7 +67,7 @@ public class CandidatUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(199, 199, 199)
-                        .addComponent(jLabel1)
+                        .addComponent(user)
                         .addGap(18, 18, 18)
                         .addComponent(use_home_label, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -82,7 +87,7 @@ public class CandidatUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(user)
                     .addComponent(use_home_label))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -146,7 +151,7 @@ public class CandidatUI extends javax.swing.JFrame {
     private javax.swing.JButton goToListOffersjButton;
     private javax.swing.JButton goTolProfilejButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel use_home_label;
+    private javax.swing.JLabel user;
     // End of variables declaration//GEN-END:variables
 }
