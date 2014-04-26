@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Haithem
+ * @author app4mob
  */
 @Embeddable
 public class CandidaturePK implements Serializable {

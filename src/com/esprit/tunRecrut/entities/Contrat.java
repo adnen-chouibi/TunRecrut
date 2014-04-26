@@ -17,20 +17,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Haithem
+ * @author app4mob
  */
 @Entity
 @Table(name = "contrat")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contrat.findAll", query = "SELECT c FROM Contrat c"),
-    @NamedQuery(name = "Contrat.findById", query = "SELECT c FROM Contrat c WHERE c.id = :id"),
-    @NamedQuery(name = "Contrat.findByNom", query = "SELECT c FROM Contrat c WHERE c.nom = :nom")})
+    @NamedQuery(name = "Contrat.findAll", query = "SELECT c FROM Contrat c")})
 public class Contrat implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,7 +60,6 @@ public class Contrat implements Serializable {
         this.nom = nom;
     }
 
-    @XmlTransient
     public Collection<Annonce> getAnnonceCollection() {
         return annonceCollection;
     }

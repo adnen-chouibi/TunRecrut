@@ -18,23 +18,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Haithem
+ * @author app4mob
  */
 @Entity
 @Table(name = "candidature")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Candidature.findAll", query = "SELECT c FROM Candidature c"),
-    @NamedQuery(name = "Candidature.findByAnnonceId", query = "SELECT c FROM Candidature c WHERE c.candidaturePK.annonceId = :annonceId"),
-    @NamedQuery(name = "Candidature.findByUserId", query = "SELECT c FROM Candidature c WHERE c.candidaturePK.userId = :userId"),
-    @NamedQuery(name = "Candidature.findByCv", query = "SELECT c FROM Candidature c WHERE c.cv = :cv"),
-    @NamedQuery(name = "Candidature.findByMotivation", query = "SELECT c FROM Candidature c WHERE c.motivation = :motivation"),
-    @NamedQuery(name = "Candidature.findByCreatedAt", query = "SELECT c FROM Candidature c WHERE c.createdAt = :createdAt"),
-    @NamedQuery(name = "Candidature.findByStatus", query = "SELECT c FROM Candidature c WHERE c.status = :status")})
+    @NamedQuery(name = "Candidature.findAll", query = "SELECT c FROM Candidature c")})
 public class Candidature implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

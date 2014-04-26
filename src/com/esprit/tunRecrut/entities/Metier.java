@@ -16,20 +16,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Haithem
+ * @author app4mob
  */
 @Entity
 @Table(name = "metier")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Metier.findAll", query = "SELECT m FROM Metier m"),
-    @NamedQuery(name = "Metier.findById", query = "SELECT m FROM Metier m WHERE m.id = :id"),
-    @NamedQuery(name = "Metier.findByNom", query = "SELECT m FROM Metier m WHERE m.nom = :nom")})
+    @NamedQuery(name = "Metier.findAll", query = "SELECT m FROM Metier m")})
 public class Metier implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -64,7 +59,6 @@ public class Metier implements Serializable {
         this.nom = nom;
     }
 
-    @XmlTransient
     public Collection<Annonce> getAnnonceCollection() {
         return annonceCollection;
     }

@@ -2,15 +2,24 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="TunRecrutPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.esprit.tunRecrut.entities.Metier</class>
-    <class>com.esprit.tunRecrut.entities.Niveau</class>
-    <class>com.esprit.tunRecrut.entities.Experience</class>
     <class>com.esprit.tunRecrut.entities.Annonce</class>
-    <class>com.esprit.tunRecrut.entities.Region</class>
-    <class>com.esprit.tunRecrut.entities.Contrat</class>
-    <class>com.esprit.tunRecrut.entities.Candidature</class>
     <class>com.esprit.tunRecrut.entities.TypeEmploi</class>
+    <class>com.esprit.tunRecrut.entities.Region</class>
+    <class>com.esprit.tunRecrut.entities.Metier</class>
+    <class>com.esprit.tunRecrut.entities.Contrat</class>
+    <class>com.esprit.tunRecrut.entities.Niveau</class>
+    <class>com.esprit.tunRecrut.entities.Candidature</class>
     <class>com.esprit.tunRecrut.entities.User</class>
+    <class>com.esprit.tunRecrut.entities.Experience</class>
+    <class>test.Contrat</class>
+    <class>test.Niveau</class>
+    <class>test.Region</class>
+    <class>test.Candidature</class>
+    <class>test.Metier</class>
+    <class>test.TypeEmploi</class>
+    <class>test.Annonce</class>
+    <class>test.User</class>
+    <class>test.Experience</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tun_recrut?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>

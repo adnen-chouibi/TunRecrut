@@ -27,24 +27,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Haithem
+ * @author app4mob
  */
 @Entity
 @Table(name = "annonce")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Annonce.findAll", query = "SELECT a FROM Annonce a"),
-    @NamedQuery(name = "Annonce.findById", query = "SELECT a FROM Annonce a WHERE a.id = :id"),
-    @NamedQuery(name = "Annonce.findByName", query = "SELECT a FROM Annonce a WHERE a.name = :name"),
-    @NamedQuery(name = "Annonce.findByType", query = "SELECT a FROM Annonce a WHERE a.type = :type"),
-    @NamedQuery(name = "Annonce.findByCreatedAt", query = "SELECT a FROM Annonce a WHERE a.createdAt = :createdAt"),
-    @NamedQuery(name = "Annonce.findByUpdatedAt", query = "SELECT a FROM Annonce a WHERE a.updatedAt = :updatedAt"),
-    @NamedQuery(name = "Annonce.findByIsActive", query = "SELECT a FROM Annonce a WHERE a.isActive = :isActive")})
+    @NamedQuery(name = "Annonce.findAll", query = "SELECT a FROM Annonce a")})
 public class Annonce implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -153,7 +144,6 @@ public class Annonce implements Serializable {
         this.isActive = isActive;
     }
 
-    @XmlTransient
     public Collection<Metier> getMetierCollection() {
         return metierCollection;
     }
@@ -202,7 +192,6 @@ public class Annonce implements Serializable {
         this.contratId = contratId;
     }
 
-    @XmlTransient
     public Collection<Candidature> getCandidatureCollection() {
         return candidatureCollection;
     }

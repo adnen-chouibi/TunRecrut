@@ -24,29 +24,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Haithem
+ * @author app4mob
  */
 @Entity
 @Table(name = "user")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "User.findByRaisonSocial", query = "SELECT u FROM User u WHERE u.raisonSocial = :raisonSocial"),
-    @NamedQuery(name = "User.findByType", query = "SELECT u FROM User u WHERE u.type = :type"),
-    @NamedQuery(name = "User.findByEmailAddress", query = "SELECT u FROM User u WHERE u.emailAddress = :emailAddress"),
-    @NamedQuery(name = "User.findByTel", query = "SELECT u FROM User u WHERE u.tel = :tel"),
-    @NamedQuery(name = "User.findByFax", query = "SELECT u FROM User u WHERE u.fax = :fax"),
-    @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
-    @NamedQuery(name = "User.findByLastLogin", query = "SELECT u FROM User u WHERE u.lastLogin = :lastLogin"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -84,6 +70,10 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     private Region regionId;
 
+    @Basic(optional = false)
+    @Column(name = "region_id")
+    private String region_id;
+    
     public User() {
     }
 
@@ -91,11 +81,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String type, String emailAddress, String password) {
+    public User(Integer id, String type, String emailAddress) {
         this.id = id;
         this.type = type;
         this.emailAddress = emailAddress;
-        this.password = password;
+        //this.password = password;
     }
 
     public Integer getId() {
@@ -186,7 +176,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @XmlTransient
     public Collection<Candidature> getCandidatureCollection() {
         return candidatureCollection;
     }
@@ -201,6 +190,10 @@ public class User implements Serializable {
 
     public void setRegionId(Region regionId) {
         this.regionId = regionId;
+    }
+    
+    public void setRegionId(String regionId) {
+        this.region_id = regionId;
     }
 
     @Override
