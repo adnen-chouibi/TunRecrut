@@ -5,11 +5,13 @@
  */
 package com.esprit.tunRecrut.ui;
 
+import com.esprit.tunRecrut.controller.UserController;
 import com.esprit.tunRecrut.dao.RegionDAO;
 import com.esprit.tunRecrut.entities.Region;
 import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.util.Session;
 import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
@@ -73,6 +75,8 @@ public class EditProfileUI extends javax.swing.JFrame {
         prenom = new javax.swing.JTextField();
         raison_label2 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
+        Modifier = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +141,20 @@ public class EditProfileUI extends javax.swing.JFrame {
         email.setToolTipText("Email");
         email.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        Modifier.setText("Modifier");
+        Modifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModifierActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Retoure");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,16 +162,6 @@ public class EditProfileUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fax)
-                            .addComponent(adresse)
-                            .addComponent(region_id, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tel)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(26, 26, 26))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(raison, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -167,7 +175,25 @@ public class EditProfileUI extends javax.swing.JFrame {
                             .addComponent(raison_label)
                             .addComponent(raison_label1)
                             .addComponent(jLabel2))
-                        .addGap(27, 27, 27))))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(fax, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(adresse, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(region_id, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Modifier, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +228,11 @@ public class EditProfileUI extends javax.swing.JFrame {
                 .addComponent(adresse, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(region_id, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modifier, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,6 +249,34 @@ public class EditProfileUI extends javax.swing.JFrame {
     private void raisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raisonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_raisonActionPerformed
+
+    private void ModifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierActionPerformed
+        // TODO add your handling code here:
+         User user = new User();
+
+        user.setRaisonSocial(raison.getText());
+        user.setFirstName(nom.getText());
+        user.setLastName(prenom.getText());
+        user.setAddress(adresse.getText());
+        user.setTel(tel.getText());
+        user.setFax(fax.getText());
+        user.setEmailAddress(email.getText());
+        Region region = new Region();
+        RegionDAO region_dao = new RegionDAO();
+        region= region_dao.getRegionById(String.valueOf(region_id.getSelectedIndex()));
+        // if(region_id.getSelectedIndex()){
+       // user.setRegionId();
+       user.setRegionId(region);
+
+        // }
+        UserController user_controller = new UserController();
+        user_controller.EditProfileAction(user);
+    }//GEN-LAST:event_ModifierActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,9 +314,11 @@ public class EditProfileUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Modifier;
     private javax.swing.JTextField adresse;
     private javax.swing.JTextField email;
     private javax.swing.JTextField fax;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

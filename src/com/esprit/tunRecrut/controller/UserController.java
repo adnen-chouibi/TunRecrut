@@ -53,5 +53,15 @@ public class UserController {
         }
 
     }
+    
+     public void EditProfileAction(User user) {
+        UserDAO uDao = new UserDAO();
+        if (uDao.EditUser(user)) {
+            JOptionPane.showMessageDialog(null, "Votre Compte à été modifier avec succes");
+        } else {
+            JOptionPane.showMessageDialog(null, "Une erreur se produit");
+        }
+
+    }
 
 }
