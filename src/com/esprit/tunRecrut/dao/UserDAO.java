@@ -5,13 +5,12 @@
  */
 package com.esprit.tunRecrut.dao;
 
-//import static com.esprit.tunRecrut.entities.Candidature_.user;
 import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.util.Crud;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,31 +19,28 @@ import com.esprit.tunRecrut.util.Crud;
 public class UserDAO {
 
     Crud crud = new Crud();
-    public boolean Authentification(User user) {
+    public boolean saveUser(User user) {
+        
          String sql =
-                "INSERT INTO  user (first_name,last_name,raison_social,type,email_address,tel,fax,address,password,region_id) VALUES ('"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getRaisonSocial()+"','"+user.getType()+"','"+user.getEmailAddress()+"','"+user.getTel()+"','"+user.getFax()+"','"+user.getAddress()+"','"+user.getPassword()+"','"+user.getRegionId()+"')";
+                "INSERT INTO  user (first_name,last_name,raison_social,type,email_address,tel,fax,address,password,region_id) VALUES ('"+user.getFirstName()+"','"+user.getLastName()+"','"+user.getRaisonSocial()+"','"+user.getType()+"','"+user.getEmailAddress()+"','"+user.getTel()+"','"+user.getFax()+"','"+user.getAddress()+"','"+user.getPassword()+"','"+user.getRegionId().getId()+"')";
         return crud.execute(sql);
     }
 
-//    public User findUserByEmailAndPassword(String email, String password) {
-//
-//        
-//         User user=null;
-//        try {
-//            String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND password = '" + password + "'";
-//            ResultSet rs = crud.exeRead(sql);
-//            while (rs.next()) {
-//
-//                user = new User(rs.getInt("id"), rs.getString("type"), rs.getString("email_address"));
-//                
-//            }
-//            Logger.getLogger("Client controller").log(Level.SEVERE, "Autheticated succss");
-//            return user;
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger("Client controller").log(Level.SEVERE, "Autheticated fail");
-//           // Logger.getLogger("Client DAO").log(Level.SEVERE, null, ex);
-//            return null;
-//        }
-//    }
+    public User findUserByEmailAndPassword(String email, String password) {
+
+        
+         User user=null;
+        try {
+            String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND password = '" + password + "'";
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                user = new User(rs.getInt("id"), rs.getString("type"), rs.getString("email_address"));
+            }
+            return user;
+
+        } catch (SQLException ex) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return null;
+        }
+    }
 }

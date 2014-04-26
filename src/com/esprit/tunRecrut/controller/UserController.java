@@ -32,5 +32,15 @@ public class UserController {
             JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");
         }
     }
+    
+    public void RegisterAction(User user) {
+        UserDAO uDao = new UserDAO();
+        if(uDao.saveUser(user))
+            JOptionPane.showMessageDialog(null, "Votre Compte à été crée avec succes");
+        else
+            JOptionPane.showMessageDialog(null, "Une erreur se produit");
+        
+        
+    }
 
 }
