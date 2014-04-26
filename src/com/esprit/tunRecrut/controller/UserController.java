@@ -32,11 +32,8 @@ public class UserController {
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
             } else if (user.getType() == 2) {
-                
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
-                // Interface_User user_interface = new User_Connexion();
-                //user_interface.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");
