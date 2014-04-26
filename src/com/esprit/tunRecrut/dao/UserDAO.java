@@ -35,6 +35,15 @@ public class UserDAO {
             ResultSet rs = crud.exeRead(sql);
             while (rs.next()) {
                 user = new User(rs.getInt("id"), rs.getString("type"), rs.getString("email_address"));
+//                 user.setFirstName(rs.getString("firs_name"));
+//                user.setLastName(rs.getString("last_name"));
+//                user.setFirstName(rs.getString("firs_name"));
+//                user.setFirstName(rs.getString("firs_name"));
+//                user.setFirstName(rs.getString("firs_name"));
+//                user.setFirstName(rs.getString("firs_name"));
+//                user.setFirstName(rs.getString("firs_name"));
+//                user.setFirstName(rs.getString("firs_name"));
+//                user.setFirstName(rs.getString("firs_name"));
             }
             return user;
 
