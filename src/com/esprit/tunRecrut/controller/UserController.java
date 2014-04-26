@@ -8,6 +8,7 @@ package com.esprit.tunRecrut.controller;
 import com.esprit.tunRecrut.dao.UserDAO;
 import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.ui.CandidatUI;
+import com.esprit.tunRecrut.ui.EditProfileUI;
 import com.esprit.tunRecrut.ui.LoginUI;
 import com.esprit.tunRecrut.util.Session;
 import javax.swing.JFrame;
@@ -35,7 +36,7 @@ public class UserController {
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
             } else if (user.getType() == 2) {
-                
+
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
             }
@@ -46,20 +47,33 @@ public class UserController {
 
     public void RegisterAction(User user) {
         UserDAO uDao = new UserDAO();
-        if (uDao.saveUser(user)) {
-            JOptionPane.showMessageDialog(null, "Votre Compte à été crée avec succes");
+        if (uDao.findUserByEmail(user.getEmailAddress())) {
+            JOptionPane.showMessageDialog(null, user.getEmailAddress() + " Existe déja");
         } else {
-            JOptionPane.showMessageDialog(null, "Une erreur se produit");
+            if (uDao.saveUser(user)) {
+                JOptionPane.showMessageDialog(null, "Votre Compte à été crée avec succes");
+            } else {
+                JOptionPane.showMessageDialog(null, "Une erreur se produit");
+            }
         }
-
     }
-    
-     public void EditProfileAction(User user) {
+
+    public void EditProfileAction(User user, JFrame edit_profile_ui) {
         UserDAO uDao = new UserDAO();
-        if (uDao.EditUser(user)) {
-            JOptionPane.showMessageDialog(null, "Votre Compte à été modifier avec succes");
+        Session connected_user = new Session();
+        if (uDao.findUserByEmail(user.getEmailAddress())) {
+            JOptionPane.showMessageDialog(null, user.getEmailAddress() + " Existe déja");
         } else {
-            JOptionPane.showMessageDialog(null, "Une erreur se produit");
+            if (uDao.EditUser(user)) {
+                user.setId(connected_user.getUser().getId());
+                user.setType(connected_user.getUser().getType());
+                user.setRaisonSocial(connected_user.getUser().getRaisonSocial());
+                connected_user.setUser(user);
+                edit_profile_ui.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Votre Compte à été modifier avec succes");
+            } else {
+                JOptionPane.showMessageDialog(null, "Une erreur se produit");
+            }
         }
 
     }

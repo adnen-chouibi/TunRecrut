@@ -270,7 +270,7 @@ public class EditProfileUI extends javax.swing.JFrame {
 
         // }
         UserController user_controller = new UserController();
-        user_controller.EditProfileAction(user);
+        user_controller.EditProfileAction(user,this);
     }//GEN-LAST:event_ModifierActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

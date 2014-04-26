@@ -30,12 +30,11 @@ public class UserDAO {
     }
 
     public boolean EditUser(User user) {
-        System.out.println(user.getAddress());
+      
         try {
             String sql
-                    = "UPDATE  user set first_name='" + user.getFirstName() + "', last_name = '" + user.getLastName() + "',raison_social= '" + user.getRaisonSocial() + "',email_address='" + user.getEmailAddress() + "',tel='" + user.getTel() + "',fax='" + user.getFax() + "',address='" + user.getAddress() + "',region_id='" + user.getRegionId().getId() + "' WHERE id = '"+new Session().getUser().getId()+"'";
-            //new Session().setUser(user);
-            System.out.println(sql);
+                    = "UPDATE  user set first_name='" + user.getFirstName() + "', last_name = '" + user.getLastName() + "',raison_social= '" + user.getRaisonSocial() + "',email_address='" + user.getEmailAddress() + "',tel='" + user.getTel() + "',fax='" + user.getFax() + "',address='" + user.getAddress() + "',region_id='" + user.getRegionId().getId() + "' WHERE id = '" + new Session().getUser().getId() + "'";
+             System.out.println(sql);
             return crud.execute(sql);
         } catch (Exception e) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
@@ -62,15 +61,34 @@ public class UserDAO {
                 user.setFax(rs.getString("fax"));
                 user.setAddress(rs.getString("address"));
                 user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
+                user.setRaisonSocial("");
                 if (user.getType() == 2) {
                     user.setRaisonSocial(rs.getString("raison_social"));
                 }
+
             }
             return user;
 
         } catch (SQLException ex) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
             return null;
+        }
+    }
+    
+     public boolean findUserByEmail(String email) {
+
+        boolean trouve = false;
+        try {
+            String sql = "SELECT * FROM user WHERE email_address = '" + email + "'";
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                trouve = true;
+            }
+            return trouve;
+
+        } catch (SQLException ex) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
         }
     }
 }
