@@ -44,6 +44,11 @@ public class CandidatUI extends javax.swing.JFrame {
         user.setText("Welcome User");
 
         goTolProfilejButton.setText("Mon Profil");
+        goTolProfilejButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goTolProfilejButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Statistique");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +116,11 @@ public class CandidatUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void goTolProfilejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goTolProfilejButtonActionPerformed
+        // TODO add your handling code here:
+        new EditProfileUI().setVisible(true);
+    }//GEN-LAST:event_goTolProfilejButtonActionPerformed
 
     /**
      * @param args the command line arguments
