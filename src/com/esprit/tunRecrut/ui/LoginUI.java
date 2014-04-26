@@ -15,6 +15,7 @@ import com.esprit.tunRecrut.entities.User;
  */
 public class LoginUI extends javax.swing.JFrame {
 
+    static User user  = new User();
     /**
      * Creates new form UserUI
      */
@@ -122,7 +123,7 @@ public class LoginUI extends javax.swing.JFrame {
         user.setEmailAddress(email.getText());
         user.setPassword(password.getText());
         UserController user_controller = new UserController();
-        user_controller.authentificationAction(user);
+        user_controller.authentificationAction(user, this);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

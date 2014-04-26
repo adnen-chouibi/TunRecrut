@@ -295,9 +295,9 @@ public final class RegisterUI extends javax.swing.JFrame {
         User user = new User();
 
         if (employer.isSelected()) {
-            user.setType("1");
+            user.setType(1);
         } else {
-            user.setType("2");
+            user.setType(2);
             user.setRaisonSocial(raison.getText());
         }
         user.setFirstName(nom.getText());

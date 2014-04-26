@@ -48,7 +48,7 @@ public class User implements Serializable {
     private String raisonSocial;
     @Basic(optional = false)
     @Column(name = "type")
-    private String type;
+    private Integer type;
     @Basic(optional = false)
     @Column(name = "email_address")
     private String emailAddress;
@@ -81,7 +81,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String type, String emailAddress) {
+    public User(Integer id, Integer type, String emailAddress) {
         this.id = id;
         this.type = type;
         this.emailAddress = emailAddress;
@@ -120,11 +120,11 @@ public class User implements Serializable {
         this.raisonSocial = raisonSocial;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
