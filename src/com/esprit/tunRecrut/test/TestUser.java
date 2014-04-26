@@ -6,6 +6,8 @@
 
 package com.esprit.tunRecrut.test;
 
+import com.esprit.tunRecrut.entities.User;
+
 /**
  *
  * @author app4mob
@@ -17,6 +19,8 @@ public class TestUser {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        User user1 = new User(1);
+        
     }
     
 }
