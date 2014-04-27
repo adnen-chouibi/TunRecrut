@@ -9,6 +9,7 @@ import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.util.Crud;
 import com.esprit.tunRecrut.util.MD5;
 import com.esprit.tunRecrut.util.Session;
+import static com.esprit.tunRecrut.util.Session.user;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -89,6 +90,40 @@ public class UserDAO {
         } catch (SQLException ex) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
             return false;
+        }
+    }
+     
+      public User getUserByEmail(String username) {
+
+        RegionDAO region_dao = new RegionDAO();
+        User user = null;
+        try {
+            String sql = "SELECT * FROM user WHERE email_address = '" + username + "@gmail.com'";
+            
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setType(rs.getInt("type"));
+                user.setEmailAddress(rs.getString("email_address"));
+                user.setTel(rs.getString("tel"));
+                user.setFax(rs.getString("fax"));
+                user.setAddress(rs.getString("address"));
+                user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
+                user.setRaisonSocial("");
+                if (user.getType() == 2) {
+                    user.setRaisonSocial(rs.getString("raison_social"));
+                }
+
+            }
+            new Session().setUser(user);
+            return user;
+
+        } catch (SQLException ex) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return null;
         }
     }
 }
