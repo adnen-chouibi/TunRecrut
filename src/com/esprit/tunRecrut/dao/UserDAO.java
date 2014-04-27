@@ -34,7 +34,7 @@ public class UserDAO {
             String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND password = '" + password + "'";
             ResultSet rs = crud.exeRead(sql);
             while (rs.next()) {
-                user = new User(rs.getInt("id"), rs.getInt("type"), rs.getString("email_address"));
+            user = new User(rs.getInt("id"), rs.getInt("type"), rs.getString("email_address"), rs.getString("first_name"), rs.getString("last_name"));
             }
             return user;
 

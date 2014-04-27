@@ -20,8 +20,8 @@ public class TestUI extends javax.swing.JFrame {
      */
     public TestUI() {
         initComponents();
-       Session session = new Session();
-        a.setText(session.user.getFirstName());
+      // SessionTunRecrut session = new SessionTunRecrut();
+        //a.setText(session.user.getFirstName());
     }
 
     /**
