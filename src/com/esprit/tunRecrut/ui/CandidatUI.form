@@ -80,7 +80,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="user">
       <Properties>
         <Property name="text" type="java.lang.String" value="Welcome User"/>
       </Properties>
@@ -94,6 +94,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mon Profil"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goTolProfilejButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>

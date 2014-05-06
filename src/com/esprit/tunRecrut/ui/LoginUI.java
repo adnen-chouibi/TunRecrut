@@ -3,24 +3,64 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.esprit.tunRecrut.ui;
 
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
+import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import com.esprit.tunRecrut.controller.UserController;
 import com.esprit.tunRecrut.entities.User;
+import static com.esprit.tunRecrut.ui.Facebook.firstRequest;
+import static com.esprit.tunRecrut.ui.Facebook.firstRequestDone;
+import static com.esprit.tunRecrut.ui.Facebook.secondRequest;
+import static com.esprit.tunRecrut.ui.Facebook.secondRequestDone;
+import com.esprit.tunRecrut.util.GraphFacebookReader;
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.parser.ParserDelegator;
 
 /**
  *
  * @author app4mob
  */
 public class LoginUI extends javax.swing.JFrame {
+    
+    public static String API_KEY = "151685701536934";
+    public static String SECRET = "11a49176d272248561e985ea9f8d081f";
+    
+    public static String firstRequest = "https://graph.facebook.com/oauth/authorize?"
+            + "client_id="
+            + API_KEY
+            + "&redirect_uri=http://www.facebook.com/connect/login_success.html&"
+            + "scope=publish_stream,offline_access,create_event,read_stream,email,user_birthday";
+    
+    public static String secondRequest = "https://graph.facebook.com/oauth/access_token?"
+            + "client_id="
+            + API_KEY
+            + "&redirect_uri=http://www.facebook.com/connect/login_success.html&"
+            + "client_secret=" + SECRET + "&code=";
 
-    static User user  = new User();
+    // public static String access_token = "CAACJ9RRbjKYBALTZBaP30DrfqZBDXUWInsf46sPwKfOoDp5kUMSwdg7ZCw9I5k2HvMVmmG8FTp4sP3QwhF9xKt4rZAlTmmHRAe3hxHZBNYVx8DWXTHNA8GyNr8UUaJIJmtObJ0ZA14TMTbE2jFW6KE7O5kqFiB09WG9XnZBlUUvGZAWrvnZCey4p2";
+    public static boolean firstRequestDone = false;
+    public static boolean secondRequestDone = false;
+    public static JFrame currentFrame;
     /**
      * Creates new form UserUI
      */
     public LoginUI() {
         initComponents();
+        NativeInterface.open();
+        NativeInterface.initialize();
+        currentFrame  =this;
     }
 
     /**
@@ -32,36 +72,29 @@ public class LoginUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        email = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        password = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        email.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        password.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton3.setText("Login via Facebook");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Email ");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Password");
-
-        jButton1.setText("se connecter");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("ou ");
 
         jButton2.setText("S'inscrir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -70,44 +103,84 @@ public class LoginUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("ou ");
+
+        jButton1.setText("se connecter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Password");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Email ");
+
+        email.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton2))
+                                .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton2))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton2))
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -119,12 +192,12 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        User user  = new User();
+        User user = new User();
         user.setEmailAddress(email.getText());
         user.setPassword(password.getText());
         UserController user_controller = new UserController();
         user_controller.authentificationAction(user, this);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -132,6 +205,83 @@ public class LoginUI extends javax.swing.JFrame {
         new RegisterUI().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        final JFrame authFrame = new JFrame();
+
+        // Create the JWebBrowser and add the WebBrowserAdapter
+        JPanel webBrowserPanel = new JPanel(new BorderLayout());
+        final JWebBrowser webBrowser = new JWebBrowser();
+        webBrowser.setMenuBarVisible(false);
+        webBrowser.setButtonBarVisible(false);
+        webBrowser.setLocationBarVisible(false);
+        webBrowser.navigate(firstRequest);
+        webBrowser.addWebBrowserListener(new WebBrowserAdapter() {
+            @Override
+            public void locationChanged(WebBrowserNavigationEvent e) {
+                super.locationChanged(e);
+                // Check if first request was not done
+                if (!firstRequestDone) {
+                    // Check if you left the location and were redirected to the next 
+                    // location
+                    if (e.getNewResourceLocation().contains("http://www.facebook.com/connect/login_success.html?code=")) {
+                        // If it successfully redirects you, get the verification code
+                        // and go for a second request
+                        String[] splits = e.getNewResourceLocation().split("=");
+                        String stage2temp = secondRequest + splits[1];
+                        System.out.println("First =" + splits[1]);
+                        webBrowser.navigate(stage2temp);
+                        firstRequestDone = true;
+                    }
+                } else {
+                    // If secondRequest is not done yet, you perform this and get the 
+                    // access_token
+                    if (!secondRequestDone) {
+                        //System.out.println(webBrowser.getHTMLContent());
+                        // Create reader with the html content
+                        StringReader readerSTR = new StringReader(webBrowser.getHTMLContent());
+                        // Create a callback for html parser
+                        HTMLEditorKit.ParserCallback callback
+                                = new HTMLEditorKit.ParserCallback() {
+                                    @Override
+                                    public void handleText(char[] data, int pos) {
+                                        System.out.println(data);
+                                        // because there is only one line with the access_token 
+                                        // in the html content you can parse it.
+                                        String string = new String(data);
+                                        String[] temp1 = string.split("&");
+                                        String[] temp2 = temp1[0].split("=");
+                                        // System.out.println("access tocken=" + temp2);
+                                        // access_token = temp2[1];
+                                        GraphFacebookReader.acces_token = temp2[1];
+                                        if (GraphFacebookReader.fetchObject()) {
+                                            currentFrame.setVisible(false);
+                                            new CandidatUI().setVisible(true);
+                                        }
+                                        else{
+                                            currentFrame.setVisible(false);
+                                        }
+                                        //System.out.println(access_token);
+                                    }
+                                };
+                        try {
+                            // Call the parse method 
+                            new ParserDelegator().parse(readerSTR, callback, false);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        // After everything is done, you can dispose the jframe
+                        //authFrame.dispose();      
+                    }
+                }
+            }
+        });
+        webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
+        authFrame.add(webBrowserPanel);
+        authFrame.setSize(700, 500);
+        authFrame.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +313,18 @@ public class LoginUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(
+                            UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new LoginUI().setVisible(true);
             }
         });
@@ -172,9 +334,11 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField password;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
 }

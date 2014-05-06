@@ -9,6 +9,7 @@ import com.esprit.tunRecrut.controller.UserController;
 import com.esprit.tunRecrut.dao.RegionDAO;
 import com.esprit.tunRecrut.entities.Region;
 import com.esprit.tunRecrut.entities.User;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,6 +28,14 @@ public final class RegisterUI extends javax.swing.JFrame {
     /**
      * Creates new form RegisterUI
      */
+    public RegisterUI(com.restfb.types.User user) {
+        initComponents();
+        initRegion();
+        nom.setText(user.getFirstName());
+        prenom.setText(user.getLastName());
+        email.setText(user.getUsername()+"@gmail.com");
+    }
+    
     public RegisterUI() {
         initComponents();
         initRegion();
@@ -366,7 +375,6 @@ public final class RegisterUI extends javax.swing.JFrame {
        user.setRegionId(region);
 
         // }
-         System.out.println("password--:"+password.getText());
         UserController user_controller = new UserController();
         user_controller.RegisterAction(user);
     }//GEN-LAST:event_jButton1ActionPerformed

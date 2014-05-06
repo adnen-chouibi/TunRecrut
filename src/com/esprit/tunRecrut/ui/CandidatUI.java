@@ -5,8 +5,6 @@
  */
 
 package com.esprit.tunRecrut.ui;
-
-import static com.esprit.tunRecrut.ui.LoginUI.user;
 import com.esprit.tunRecrut.util.Session;
 
 
