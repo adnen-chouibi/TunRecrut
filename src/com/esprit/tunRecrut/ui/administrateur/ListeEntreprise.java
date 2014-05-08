@@ -18,12 +18,12 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author app4mob
  */
-public class ListeCondidat extends javax.swing.JFrame {
+public class ListeEntreprise extends javax.swing.JFrame {
 
     /**
      * Creates new form ListeCondidat
      */
-    public ListeCondidat() {
+    public ListeEntreprise() {
         initComponents();
     }
 
@@ -45,23 +45,22 @@ public class ListeCondidat extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        goToEntreprise = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        goToCharte = new javax.swing.JButton();
+        goToNewsLettre = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         gotToCandidat = new javax.swing.JButton();
-        Logout = new javax.swing.JButton();
-        goToNewsLettre = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        goToCharte = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        goToEntreprise = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Liste Candidat");
+        setTitle("Liste Entreprises");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Liste des candidats"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Liste des Entreprises"));
 
         activer.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/activer-user.png"))); // NOI18N
@@ -115,7 +114,7 @@ public class ListeCondidat extends javax.swing.JFrame {
         });
 
         jTable1.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
-        jTable1.setModel(new com.esprit.tunRecrut.ui.administrateur.ListeCondidatTable(""));
+        jTable1.setModel(new com.esprit.tunRecrut.ui.administrateur.ListeEntrepriseTable(""));
         jTable1.setRowHeight(28);
         jTable1.setShowVerticalLines(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,26 +130,26 @@ public class ListeCondidat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(keyword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                         .addComponent(supprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(desactiver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(activer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(activer)
@@ -159,43 +158,33 @@ public class ListeCondidat extends javax.swing.JFrame {
                     .addComponent(keyword)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         supprimer.getAccessibleContext().setAccessibleDescription("");
 
-        jLabel2.setText("Liste des condidat");
-
-        jLabel5.setText("Envoyer des news lettre");
-
-        jLabel6.setText("Déconnexion");
-
-        goToEntreprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
-        goToEntreprise.setBorder(null);
-        goToEntreprise.setBorderPainted(false);
-        goToEntreprise.setContentAreaFilled(false);
-        goToEntreprise.setFocusPainted(false);
-        goToEntreprise.setRequestFocusEnabled(false);
-        goToEntreprise.addActionListener(new java.awt.event.ActionListener() {
+        goToNewsLettre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/news-lettre.png"))); // NOI18N
+        goToNewsLettre.setBorder(null);
+        goToNewsLettre.setBorderPainted(false);
+        goToNewsLettre.setContentAreaFilled(false);
+        goToNewsLettre.setFocusPainted(false);
+        goToNewsLettre.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
+        goToNewsLettre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToEntrepriseActionPerformed(evt);
+                goToNewsLettreActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Liste des entreprises");
-
-        goToCharte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/charte.png"))); // NOI18N
-        goToCharte.setBorder(null);
-        goToCharte.setBorderPainted(false);
-        goToCharte.setContentAreaFilled(false);
-        goToCharte.setDefaultCapable(false);
-        goToCharte.setFocusPainted(false);
-        goToCharte.setFocusable(false);
-        goToCharte.setRolloverEnabled(false);
-        goToCharte.addActionListener(new java.awt.event.ActionListener() {
+        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/logout.png"))); // NOI18N
+        Logout.setBorder(null);
+        Logout.setBorderPainted(false);
+        Logout.setContentAreaFilled(false);
+        Logout.setFocusPainted(false);
+        Logout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
+        Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToCharteActionPerformed(evt);
+                LogoutActionPerformed(evt);
             }
         });
 
@@ -215,29 +204,39 @@ public class ListeCondidat extends javax.swing.JFrame {
             }
         });
 
-        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/logout.png"))); // NOI18N
-        Logout.setBorder(null);
-        Logout.setBorderPainted(false);
-        Logout.setContentAreaFilled(false);
-        Logout.setFocusPainted(false);
-        Logout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
-        Logout.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Liste des entreprises");
+
+        goToCharte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/charte.png"))); // NOI18N
+        goToCharte.setBorder(null);
+        goToCharte.setBorderPainted(false);
+        goToCharte.setContentAreaFilled(false);
+        goToCharte.setDefaultCapable(false);
+        goToCharte.setFocusPainted(false);
+        goToCharte.setFocusable(false);
+        goToCharte.setRolloverEnabled(false);
+        goToCharte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
+                goToCharteActionPerformed(evt);
             }
         });
 
-        goToNewsLettre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/news-lettre.png"))); // NOI18N
-        goToNewsLettre.setBorder(null);
-        goToNewsLettre.setBorderPainted(false);
-        goToNewsLettre.setContentAreaFilled(false);
-        goToNewsLettre.setFocusPainted(false);
-        goToNewsLettre.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
-        goToNewsLettre.addActionListener(new java.awt.event.ActionListener() {
+        jLabel6.setText("Déconnexion");
+
+        goToEntreprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToEntreprise.setBorder(null);
+        goToEntreprise.setBorderPainted(false);
+        goToEntreprise.setContentAreaFilled(false);
+        goToEntreprise.setFocusPainted(false);
+        goToEntreprise.setRequestFocusEnabled(false);
+        goToEntreprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToNewsLettreActionPerformed(evt);
+                goToEntrepriseActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Liste des condidat");
+
+        jLabel5.setText("Envoyer des news lettre");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -306,7 +305,7 @@ public class ListeCondidat extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -315,9 +314,8 @@ public class ListeCondidat extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -335,8 +333,8 @@ public class ListeCondidat extends javax.swing.JFrame {
     }//GEN-LAST:event_keywordKeyTyped
 
     private void keywordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keywordKeyReleased
-        System.out.println(keyword.getText());
-        jTable1.setModel(new ListeCondidatTable(keyword.getText()));
+        System.out.println();
+        jTable1.setModel(new ListeEntrepriseTable(keyword.getText()));
         jScrollPane1.setViewportView(jTable1);
     }//GEN-LAST:event_keywordKeyReleased
 
@@ -344,9 +342,9 @@ public class ListeCondidat extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         Object candidat_id = jTable1.getValueAt(row, 0);
         UserDAO userdao = new UserDAO();
-
+   
         userdao.DeactivateUser(candidat_id.hashCode());
-        jTable1.setModel(new ListeCondidatTable(keyword.getText()));
+        jTable1.setModel(new ListeEntrepriseTable(keyword.getText()));
         jScrollPane1.setViewportView(jTable1);
 
 
@@ -357,7 +355,7 @@ public class ListeCondidat extends javax.swing.JFrame {
         Object candidat_id = jTable1.getValueAt(row, 0);
         UserDAO userdao = new UserDAO();
         userdao.ActivateUser(candidat_id.hashCode());
-        jTable1.setModel(new ListeCondidatTable(keyword.getText()));
+        jTable1.setModel(new ListeEntrepriseTable(keyword.getText()));
         jScrollPane1.setViewportView(jTable1);
     }//GEN-LAST:event_activerActionPerformed
 
@@ -381,38 +379,39 @@ public class ListeCondidat extends javax.swing.JFrame {
         Object candidat_id = jTable1.getValueAt(row, 0);
         UserDAO userdao = new UserDAO();
         userdao.DeleteUser(candidat_id.hashCode());
-        jTable1.setModel(new ListeCondidatTable(keyword.getText()));
+        jTable1.setModel(new ListeEntrepriseTable(keyword.getText()));
         jScrollPane1.setViewportView(jTable1);
         supprimer.setEnabled(false);
 
     }//GEN-LAST:event_supprimerActionPerformed
-
-    private void goToEntrepriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToEntrepriseActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new ListeEntreprise().setVisible(true);
-    }//GEN-LAST:event_goToEntrepriseActionPerformed
-
-    private void goToCharteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCharteActionPerformed
-        // TODO add your handling code here:
-        //  new PieChart().showStatestique();
-        this.setVisible(false);
-        new StatistiqueUI().setVisible(true);
-    }//GEN-LAST:event_goToCharteActionPerformed
-
-    private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gotToCandidatActionPerformed
-
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogoutActionPerformed
 
     private void goToNewsLettreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNewsLettreActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new NewsLettreUI().setVisible(true);
     }//GEN-LAST:event_goToNewsLettreActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LogoutActionPerformed
+
+    private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListeCondidat().setVisible(true);
+    }//GEN-LAST:event_gotToCandidatActionPerformed
+
+    private void goToCharteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCharteActionPerformed
+        // TODO add your handling code here:
+          this.setVisible(false);
+        new StatistiqueUI().setVisible(true);
+    }//GEN-LAST:event_goToCharteActionPerformed
+
+    private void goToEntrepriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToEntrepriseActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListeEntreprise().setVisible(true);
+    }//GEN-LAST:event_goToEntrepriseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,13 +430,13 @@ public class ListeCondidat extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListeCondidat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeEntreprise.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListeCondidat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeEntreprise.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListeCondidat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeEntreprise.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListeCondidat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListeEntreprise.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -448,15 +447,15 @@ public class ListeCondidat extends javax.swing.JFrame {
                     UIManager.setLookAndFeel(
                             UIManager.getSystemLookAndFeelClassName());
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ListeCondidat.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListeEntreprise.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
-                    Logger.getLogger(ListeCondidat.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListeEntreprise.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
-                    Logger.getLogger(ListeCondidat.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListeEntreprise.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(ListeCondidat.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ListeEntreprise.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                new ListeCondidat().setVisible(true);
+                new ListeEntreprise().setVisible(true);
             }
         });
     }

@@ -15,19 +15,19 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author app4mob
  */
-public class Model extends AbstractTableModel {
+public class ListeEntrepriseTable extends AbstractTableModel {
 
-    String[] colonnes = {"Id", "Etat", "Nom", "Email", "Tel", "Fax", "Adresse", "Region"};
+    String[] colonnes = {"Id", "Etat", "Nom", "Raison Social", "Email", "Tel", "Fax", "Adresse", "Region"};
     List<User> ligne = new ArrayList<User>();
 
-    public Model() {
+    public ListeEntrepriseTable() {
         UserDAO userdao = new UserDAO();
         ligne = userdao.getAllCandidat();
     }
 
-    public Model(String text) {
+    public ListeEntrepriseTable(String text) {
         UserDAO userdao = new UserDAO();
-        ligne = userdao.getAllCandidatByKey(text);
+        ligne = userdao.getAllEntrepriseByKey(text);
     }
 
     @Override
@@ -61,14 +61,16 @@ public class Model extends AbstractTableModel {
             case 2:
                 return ligne.get(rowIndex).getFirstName() + " " + ligne.get(rowIndex).getLastName();
             case 3:
-                return ligne.get(rowIndex).getEmailAddress();
+                return ligne.get(rowIndex).getRaisonSocial();
             case 4:
-                return ligne.get(rowIndex).getTel();
+                return ligne.get(rowIndex).getEmailAddress();
             case 5:
-                return ligne.get(rowIndex).getFax();
+                return ligne.get(rowIndex).getTel();
             case 6:
-                return ligne.get(rowIndex).getAddress();
+                return ligne.get(rowIndex).getFax();
             case 7:
+                return ligne.get(rowIndex).getAddress();
+            case 8:
                 return ligne.get(rowIndex).getRegionId().getName();
             default:
                 return null;

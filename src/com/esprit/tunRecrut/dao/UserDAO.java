@@ -33,11 +33,11 @@ public class UserDAO {
     }
 
     public boolean EditUser(User user) {
-      
+
         try {
             String sql
                     = "UPDATE  user set first_name='" + user.getFirstName() + "', last_name = '" + user.getLastName() + "',raison_social= '" + user.getRaisonSocial() + "',email_address='" + user.getEmailAddress() + "',tel='" + user.getTel() + "',fax='" + user.getFax() + "',address='" + user.getAddress() + "',region_id='" + user.getRegionId().getId() + "' WHERE id = '" + new Session().getUser().getId() + "'";
-             System.out.println(sql);
+            System.out.println(sql);
             return crud.execute(sql);
         } catch (Exception e) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
@@ -77,8 +77,8 @@ public class UserDAO {
             return null;
         }
     }
-    
-     public boolean findUserByEmail(String email) {
+
+    public boolean findUserByEmail(String email) {
 
         boolean trouve = false;
         try {
@@ -94,14 +94,14 @@ public class UserDAO {
             return false;
         }
     }
-     
-      public User getUserByEmail(String username) {
+
+    public User getUserByEmail(String username) {
 
         RegionDAO region_dao = new RegionDAO();
         User user = null;
         try {
             String sql = "SELECT * FROM user WHERE email_address = '" + username + "@gmail.com'";
-            
+
             ResultSet rs = crud.exeRead(sql);
             while (rs.next()) {
                 user = new User();
@@ -128,47 +128,14 @@ public class UserDAO {
             return null;
         }
     }
-        public List<User> getAllCandidat() {
-            RegionDAO region_dao = new RegionDAO();
+
+    public List<User> getAllCandidat() {
+        RegionDAO region_dao = new RegionDAO();
         String req = "select * from user";
         List<User> users = new ArrayList<User>();
         User user;
         try {
-             ResultSet rs = crud.exeRead(req);
-            while (rs.next()) {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setFirstName(rs.getString("first_name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setType(rs.getInt("type"));
-                user.setEmailAddress(rs.getString("email_address"));
-                user.setTel(rs.getString("tel"));
-                user.setFax(rs.getString("fax"));
-                user.setAddress(rs.getString("address"));
-                user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
-                user.setRaisonSocial("");
-                                user.setActive(rs.getInt("active"));
-
-                if (user.getType() == 2) {
-                    user.setRaisonSocial(rs.getString("raison_social"));
-                }
-
-                users.add(user);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return users;
-    }
-        public List<User> getAllCandidatByKey(String text) {
-            RegionDAO region_dao = new RegionDAO();
-        String req = "select * from user where first_name LIKE '%"+text+"%' or last_name LIKE '%"+text+"%' or address LIKE '%"+text+"%'";
-        List<User> users = new ArrayList<User>();
-        User user;
-        try {
-             ResultSet rs = crud.exeRead(req);
+            ResultSet rs = crud.exeRead(req);
             while (rs.next()) {
                 user = new User();
                 user.setId(rs.getInt("id"));
@@ -182,6 +149,7 @@ public class UserDAO {
                 user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
                 user.setRaisonSocial("");
                 user.setActive(rs.getInt("active"));
+
                 if (user.getType() == 2) {
                     user.setRaisonSocial(rs.getString("raison_social"));
                 }
@@ -196,25 +164,125 @@ public class UserDAO {
         return users;
     }
 
-    public boolean  ActivateUser(int id) {
-         try {
+    public List<User> getAllCandidatByKey(String text) {
+        RegionDAO region_dao = new RegionDAO();
+        String req = "select * from user where (first_name LIKE '%" + text + "%' or last_name LIKE '%" + text + "%' or address LIKE '%" + text + "%') and type = 1";
+        List<User> users = new ArrayList<User>();
+        User user;
+        try {
+            ResultSet rs = crud.exeRead(req);
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setType(rs.getInt("type"));
+                user.setEmailAddress(rs.getString("email_address"));
+                user.setTel(rs.getString("tel"));
+                user.setFax(rs.getString("fax"));
+                user.setAddress(rs.getString("address"));
+                user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
+                user.setRaisonSocial("");
+                user.setActive(rs.getInt("active"));
+
+                users.add(user);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return users;
+    }
+
+    public boolean ActivateUser(int id) {
+        try {
             String sql
-                    = "UPDATE  user set active=1 where id="+id; 
+                    = "UPDATE  user set active=1 where id=" + id;
             return crud.execute(sql);
         } catch (Exception e) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
             return false;
         }
     }
-    
-    public boolean  DeactivateUser(int id) {
-         try {
+
+    public boolean DeactivateUser(int id) {
+        try {
             String sql
-                    = "UPDATE  user set active=0 where id="+id; 
+                    = "UPDATE  user set active=0 where id=" + id;
             return crud.execute(sql);
         } catch (Exception e) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
             return false;
         }
     }
+
+    public boolean DeleteUser(int id) {
+        try {
+            String sql
+                    = "DELETE FROM user WHERE id=" + id;
+            return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+    }
+
+    public List<User> getAllEntrepriseByKey(String text) {
+        RegionDAO region_dao = new RegionDAO();
+        String req = "select * from user where (first_name LIKE '%" + text + "%' or last_name LIKE '%" + text + "%' or address LIKE '%" + text + "%') and type = 2";
+        List<User> users = new ArrayList<User>();
+        User user;
+        try {
+            ResultSet rs = crud.exeRead(req);
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setType(rs.getInt("type"));
+                user.setEmailAddress(rs.getString("email_address"));
+                user.setTel(rs.getString("tel"));
+                user.setFax(rs.getString("fax"));
+                user.setAddress(rs.getString("address"));
+                user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
+                user.setRaisonSocial("");
+                user.setActive(rs.getInt("active"));
+
+                user.setRaisonSocial(rs.getString("raison_social"));
+
+                users.add(user);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return users;
+    }
+
+    public List<User> getAllUser() {
+        RegionDAO region_dao = new RegionDAO();
+        String req = "select region_id, count(*) nb from user group by region_id";
+        List<User> users = new ArrayList<User>();
+        User user;
+        try {
+            ResultSet rs = crud.exeRead(req);
+            while (rs.next()) {
+                user = new User();
+                
+                user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
+                user.setNbUserByRegion(rs.getInt("nb"));
+                System.out.println(rs.getInt("nb"));
+
+                users.add(user);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return users;
+    }
+
 }

@@ -73,6 +73,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "region_id")
     private String region_id;
+    private int nbUserByCategorie;
 
     public User() {
     }
@@ -228,6 +229,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.esprit.tunRecrut.entities.User[ id=" + id + " ]";
+    }
+
+    public void setNbUserByRegion(int nb) {
+        this.nbUserByCategorie = nb;
+    }
+
+    public int getNbUserByRegion() {
+        return this.nbUserByCategorie;
     }
 
 }
