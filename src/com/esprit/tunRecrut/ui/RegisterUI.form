@@ -250,7 +250,7 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="type"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Employer"/>
+            <Property name="text" type="java.lang.String" value="Candidat"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="employerMouseClicked"/>
@@ -266,10 +266,11 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="type"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Employeur"/>
+            <Property name="text" type="java.lang.String" value="Entreprise"/>
           </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="employeurStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeurActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="raison">

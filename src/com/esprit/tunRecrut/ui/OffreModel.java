@@ -48,6 +48,11 @@ public class OffreModel extends AbstractTableModel {
             case 0 : return data.get(rowIndex).getId();
             case 1 : return data.get(rowIndex).getName();
             case 2 : return data.get(rowIndex).getUpdatedAt();          
+//            case 2 : return data.get(rowIndex).getContrat();          
+//            case 2 : return data.get(rowIndex).getExperience();          
+//            case 2 : return data.get(rowIndex).getTypeEmploi();          
+//            case 2 : return data.get(rowIndex).getNiveau();          
+//            case 2 : return data.get(rowIndex).getRegion();          
             default: return null;
         }
     }

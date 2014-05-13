@@ -136,7 +136,7 @@ public final class RegisterUI extends javax.swing.JFrame {
 
         employer.setBackground(new java.awt.Color(255, 255, 255));
         type.add(employer);
-        employer.setText("Employer");
+        employer.setText("Candidat");
         employer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 employerMouseClicked(evt);
@@ -155,10 +155,15 @@ public final class RegisterUI extends javax.swing.JFrame {
 
         employeur.setBackground(new java.awt.Color(255, 255, 255));
         type.add(employeur);
-        employeur.setText("Employeur");
+        employeur.setText("Entreprise");
         employeur.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 employeurStateChanged(evt);
+            }
+        });
+        employeur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeurActionPerformed(evt);
             }
         });
 
@@ -399,6 +404,10 @@ public final class RegisterUI extends javax.swing.JFrame {
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
+
+    private void employeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_employeurActionPerformed
 
     /**
      * @param args the command line arguments
