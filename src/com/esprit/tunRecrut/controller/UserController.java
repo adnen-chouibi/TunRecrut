@@ -40,17 +40,30 @@ public class UserController {
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
             }
+
         } else {
             JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");
         }
     }
 
-    public void RegisterAction(User user) {
+    public void RegisterAction(User user, JFrame register_ui) {
         UserDAO uDao = new UserDAO();
+        Session session = new Session();
         if (uDao.findUserByEmail(user.getEmailAddress())) {
             JOptionPane.showMessageDialog(null, user.getEmailAddress() + " Existe déja");
         } else {
             if (uDao.saveUser(user)) {
+                session.setUser(user);
+                if (user.getType() == 1) {
+                    CandidatUI candidat_ui = new CandidatUI();
+                    candidat_ui.setVisible(true);
+                } else if (user.getType() == 2) {
+
+                    CandidatUI candidat_ui = new CandidatUI();
+                    candidat_ui.setVisible(true);
+                }
+                
+                register_ui.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Votre Compte à été crée avec succes");
             } else {
                 JOptionPane.showMessageDialog(null, "Une erreur se produit");

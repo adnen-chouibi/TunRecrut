@@ -5,7 +5,9 @@
  */
 package com.esprit.tunRecrut.ui.administrateur;
 
+import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.dao.UserDAO;
+import com.esprit.tunRecrut.entities.Annonce;
 import com.esprit.tunRecrut.entities.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,45 +32,45 @@ public class StatistiqueUI extends javax.swing.JFrame {
     public StatistiqueUI() {
         initComponents();
         dataset = new DefaultPieDataset();
-        List<User> users = new ArrayList<User>();
-        UserDAO userdao = new UserDAO();
-        users = userdao.getAllUser();
-        for (User user : users) {
-            dataset.setValue(user.getRegionId().getName(), user.getNbUserByRegion());
+        List<Annonce> annonces = new ArrayList<Annonce>();
+        AnnonceDAO userdao = new AnnonceDAO();
+        annonces = userdao.getAllOffre();
+        for (Annonce annonce : annonces) {
+            dataset.setValue(annonce.getExperience(), annonce.getNbAnnonceByExperience());
         }
 
-        graphe = ChartFactory.createPieChart3D("Statstique des utilisateurs par région", dataset, true, true, false);
-        
+        graphe = ChartFactory.createPieChart3D("Statstique des Demmande d'emploi par experience", dataset, true, true, false);
+
         ChartPanel jPanel1 = new ChartPanel(graphe);
 
-          setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 647, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 596, Short.MAX_VALUE)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 596, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
         );
         pack();
         //  this.add(cp);
@@ -85,42 +87,20 @@ public class StatistiqueUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        goToNewsLettre = new javax.swing.JButton();
-        Logout = new javax.swing.JButton();
         gotToCandidat = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         goToEntreprise = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         goToCharte = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        goToOffre = new javax.swing.JButton();
+        goToNewsLettre = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        Logout = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        goToNewsLettre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/news-lettre.png"))); // NOI18N
-        goToNewsLettre.setBorder(null);
-        goToNewsLettre.setBorderPainted(false);
-        goToNewsLettre.setContentAreaFilled(false);
-        goToNewsLettre.setFocusPainted(false);
-        goToNewsLettre.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
-        goToNewsLettre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToNewsLettreActionPerformed(evt);
-            }
-        });
-
-        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/logout.png"))); // NOI18N
-        Logout.setBorder(null);
-        Logout.setBorderPainted(false);
-        Logout.setContentAreaFilled(false);
-        Logout.setFocusPainted(false);
-        Logout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
-        Logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
-            }
-        });
 
         gotToCandidat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-candidat.png"))); // NOI18N
         gotToCandidat.setBorder(null);
@@ -136,7 +116,9 @@ public class StatistiqueUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Liste des condidat");
+        jLabel12.setText("Déconnexion");
+
+        jLabel7.setText("Liste des entreprises");
 
         goToEntreprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
         goToEntreprise.setBorder(null);
@@ -149,8 +131,6 @@ public class StatistiqueUI extends javax.swing.JFrame {
                 goToEntrepriseActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Liste des entreprises");
 
         goToCharte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/charte.png"))); // NOI18N
         goToCharte.setBorder(null);
@@ -166,75 +146,121 @@ public class StatistiqueUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Envoyer des news lettre");
+        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToOffre.setBorder(null);
+        goToOffre.setBorderPainted(false);
+        goToOffre.setContentAreaFilled(false);
+        goToOffre.setFocusPainted(false);
+        goToOffre.setRequestFocusEnabled(false);
+        goToOffre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goToOffreActionPerformed(evt);
+            }
+        });
+
+        goToNewsLettre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/news-lettre.png"))); // NOI18N
+        goToNewsLettre.setBorder(null);
+        goToNewsLettre.setBorderPainted(false);
+        goToNewsLettre.setContentAreaFilled(false);
+        goToNewsLettre.setFocusPainted(false);
+        goToNewsLettre.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
+        goToNewsLettre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goToNewsLettreActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Générer des statistique");
 
-        jLabel6.setText("Déconnexion");
+        jLabel2.setText("Liste des condidat");
+
+        jLabel13.setText("Envoyer des news lettre");
+
+        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/logout.png"))); // NOI18N
+        Logout.setBorder(null);
+        Logout.setBorderPainted(false);
+        Logout.setContentAreaFilled(false);
+        Logout.setFocusPainted(false);
+        Logout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Liste des offres");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(goToNewsLettre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(goToEntreprise, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gotToCandidat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(gotToCandidat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(goToEntreprise, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(goToOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel14))
+                                    .addComponent(goToNewsLettre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(616, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(gotToCandidat, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(48, 48, 48)
+                .addGap(21, 21, 21)
                 .addComponent(goToEntreprise, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(50, 50, 50)
+                .addComponent(jLabel7)
+                .addGap(30, 30, 30)
+                .addComponent(goToOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addGap(18, 18, 18)
                 .addComponent(goToNewsLettre, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(35, 35, 35)
-                .addComponent(Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(16, 16, 16)
+                .addComponent(Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(jLabel12)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void goToCharteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCharteActionPerformed
+    private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
         // TODO add your handling code here:
-        new PieChart().showStatestique();
-    }//GEN-LAST:event_goToCharteActionPerformed
+        new ListeCondidat().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_gotToCandidatActionPerformed
 
     private void goToEntrepriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToEntrepriseActionPerformed
         // TODO add your handling code here:
@@ -242,21 +268,27 @@ public class StatistiqueUI extends javax.swing.JFrame {
         new ListeEntreprise().setVisible(true);
     }//GEN-LAST:event_goToEntrepriseActionPerformed
 
-    private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
+    private void goToCharteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCharteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ListeCondidat().setVisible(true);
-    }//GEN-LAST:event_gotToCandidatActionPerformed
+        new StatistiqueUI().setVisible(true);
+    }//GEN-LAST:event_goToCharteActionPerformed
 
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+    private void goToOffreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToOffreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LogoutActionPerformed
+        this.setVisible(false);
+        new ListOffre().setVisible(true);
+    }//GEN-LAST:event_goToOffreActionPerformed
 
     private void goToNewsLettreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNewsLettreActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new NewsLettreUI().setVisible(true);
     }//GEN-LAST:event_goToNewsLettreActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,11 +330,13 @@ public class StatistiqueUI extends javax.swing.JFrame {
     private javax.swing.JButton goToCharte;
     private javax.swing.JButton goToEntreprise;
     private javax.swing.JButton goToNewsLettre;
+    private javax.swing.JButton goToOffre;
     private javax.swing.JButton gotToCandidat;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

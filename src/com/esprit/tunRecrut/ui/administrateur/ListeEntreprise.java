@@ -45,16 +45,18 @@ public class ListeEntreprise extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        goToNewsLettre = new javax.swing.JButton();
-        Logout = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        gotToCandidat = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        goToCharte = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        goToEntreprise = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        goToOffre = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        goToEntreprise = new javax.swing.JButton();
+        gotToCandidat = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        goToNewsLettre = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        Logout = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        goToCharte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Liste Entreprises");
@@ -158,37 +160,41 @@ public class ListeEntreprise extends javax.swing.JFrame {
                     .addComponent(keyword)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         supprimer.getAccessibleContext().setAccessibleDescription("");
 
-        goToNewsLettre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/news-lettre.png"))); // NOI18N
-        goToNewsLettre.setBorder(null);
-        goToNewsLettre.setBorderPainted(false);
-        goToNewsLettre.setContentAreaFilled(false);
-        goToNewsLettre.setFocusPainted(false);
-        goToNewsLettre.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
-        goToNewsLettre.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Liste des entreprises");
+
+        jLabel5.setText("Envoyer des news lettre");
+
+        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToOffre.setBorder(null);
+        goToOffre.setBorderPainted(false);
+        goToOffre.setContentAreaFilled(false);
+        goToOffre.setFocusPainted(false);
+        goToOffre.setRequestFocusEnabled(false);
+        goToOffre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToNewsLettreActionPerformed(evt);
+                goToOffreActionPerformed(evt);
             }
         });
 
-        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/logout.png"))); // NOI18N
-        Logout.setBorder(null);
-        Logout.setBorderPainted(false);
-        Logout.setContentAreaFilled(false);
-        Logout.setFocusPainted(false);
-        Logout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
-        Logout.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Liste des condidat");
+
+        goToEntreprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToEntreprise.setBorder(null);
+        goToEntreprise.setBorderPainted(false);
+        goToEntreprise.setContentAreaFilled(false);
+        goToEntreprise.setFocusPainted(false);
+        goToEntreprise.setRequestFocusEnabled(false);
+        goToEntreprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
+                goToEntrepriseActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Générer des statistique");
 
         gotToCandidat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-candidat.png"))); // NOI18N
         gotToCandidat.setBorder(null);
@@ -204,7 +210,35 @@ public class ListeEntreprise extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Liste des entreprises");
+        jLabel6.setText("Déconnexion");
+
+        goToNewsLettre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/news-lettre.png"))); // NOI18N
+        goToNewsLettre.setBorder(null);
+        goToNewsLettre.setBorderPainted(false);
+        goToNewsLettre.setContentAreaFilled(false);
+        goToNewsLettre.setFocusPainted(false);
+        goToNewsLettre.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
+        goToNewsLettre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goToNewsLettreActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Générer des statistique");
+
+        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/logout.png"))); // NOI18N
+        Logout.setBorder(null);
+        Logout.setBorderPainted(false);
+        Logout.setContentAreaFilled(false);
+        Logout.setFocusPainted(false);
+        Logout.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/desactiver-user.png"))); // NOI18N
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Liste des offres");
 
         goToCharte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/charte.png"))); // NOI18N
         goToCharte.setBorder(null);
@@ -220,58 +254,45 @@ public class ListeEntreprise extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Déconnexion");
-
-        goToEntreprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
-        goToEntreprise.setBorder(null);
-        goToEntreprise.setBorderPainted(false);
-        goToEntreprise.setContentAreaFilled(false);
-        goToEntreprise.setFocusPainted(false);
-        goToEntreprise.setRequestFocusEnabled(false);
-        goToEntreprise.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goToEntrepriseActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Liste des condidat");
-
-        jLabel5.setText("Envoyer des news lettre");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4)
-                        .addComponent(goToEntreprise, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gotToCandidat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(goToNewsLettre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(goToNewsLettre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(gotToCandidat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(goToEntreprise, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(goToOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel7)))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,19 +300,23 @@ public class ListeEntreprise extends javax.swing.JFrame {
                 .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(gotToCandidat, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(48, 48, 48)
+                .addGap(21, 21, 21)
                 .addComponent(goToEntreprise, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(50, 50, 50)
+                .addGap(30, 30, 30)
+                .addComponent(goToOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
                 .addComponent(goToNewsLettre, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGap(35, 35, 35)
+                .addGap(16, 16, 16)
                 .addComponent(Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
@@ -385,6 +410,24 @@ public class ListeEntreprise extends javax.swing.JFrame {
 
     }//GEN-LAST:event_supprimerActionPerformed
 
+    private void goToOffreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToOffreActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListOffre().setVisible(true);
+    }//GEN-LAST:event_goToOffreActionPerformed
+
+    private void goToEntrepriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToEntrepriseActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListeEntreprise().setVisible(true);
+    }//GEN-LAST:event_goToEntrepriseActionPerformed
+
+    private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
+        // TODO add your handling code here:
+        new ListeCondidat().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_gotToCandidatActionPerformed
+
     private void goToNewsLettreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNewsLettreActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -395,23 +438,11 @@ public class ListeEntreprise extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LogoutActionPerformed
 
-    private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new ListeCondidat().setVisible(true);
-    }//GEN-LAST:event_gotToCandidatActionPerformed
-
     private void goToCharteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCharteActionPerformed
         // TODO add your handling code here:
-          this.setVisible(false);
+        this.setVisible(false);
         new StatistiqueUI().setVisible(true);
     }//GEN-LAST:event_goToCharteActionPerformed
-
-    private void goToEntrepriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToEntrepriseActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new ListeEntreprise().setVisible(true);
-    }//GEN-LAST:event_goToEntrepriseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,6 +498,7 @@ public class ListeEntreprise extends javax.swing.JFrame {
     private javax.swing.JButton goToCharte;
     private javax.swing.JButton goToEntreprise;
     private javax.swing.JButton goToNewsLettre;
+    private javax.swing.JButton goToOffre;
     private javax.swing.JButton gotToCandidat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -474,6 +506,7 @@ public class ListeEntreprise extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

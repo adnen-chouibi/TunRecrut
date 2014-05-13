@@ -287,5 +287,70 @@ public class Annonce implements Serializable {
     public void setMetier(int[] ids){
         this.metier_ids = ids;
     }
+    
+    String region;
+    String contrat;
+    String niveau;
+    String user;
+    String experience;
+    String type_emploi;
 
+    public String getType_emploi() {
+        return type_emploi;
+    }
+
+    public void setType_emploi(String type_emploi) {
+        this.type_emploi = type_emploi;
+    }
+
+  
+    public String getRegion() {
+        return region;
+    }
+
+    public String getContrat() {
+        return contrat;
+    }
+
+    public String getNiveau() {
+        return niveau;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setContrat(String contrat) {
+        this.contrat = contrat;
+    }
+
+    public void setNiveau(String niveau) {
+        this.niveau = niveau;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+    
+int nbAnnonceByExperience;
+
+    public int getNbAnnonceByExperience() {
+        return nbAnnonceByExperience;
+    }
+
+    public void setNbAnnonceByExperience(int nbAnnonceByExperience) {
+        this.nbAnnonceByExperience = nbAnnonceByExperience;
+    }
 }
