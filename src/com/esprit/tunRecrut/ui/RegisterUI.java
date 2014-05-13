@@ -39,6 +39,7 @@ public final class RegisterUI extends javax.swing.JFrame {
     public RegisterUI() {
         initComponents();
         initRegion();
+        setTitle("Inscription");
     }
 
     public void initRegion() {

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.esprit.tunRecrut.entities;
 
 import java.io.Serializable;
@@ -37,6 +36,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Annonce.findAll", query = "SELECT a FROM Annonce a")})
 public class Annonce implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -192,6 +192,52 @@ public class Annonce implements Serializable {
         this.contratId = contratId;
     }
 
+    private int contrat_id;
+    private int region_id;
+
+    public void setContrat_id(int contrat_id) {
+        this.contrat_id = contrat_id;
+    }
+
+    public void setRegion_id(int region_id) {
+        this.region_id = region_id;
+    }
+
+    public void setNiveau_id(int niveau_id) {
+        this.niveau_id = niveau_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
+    }
+
+    public void setExprience_id(int exprience_id) {
+        this.exprience_id = exprience_id;
+    }
+
+    public int getContrat_id() {
+        return contrat_id;
+    }
+
+    public int getRegion_id() {
+        return region_id;
+    }
+
+    public int getNiveau_id() {
+        return niveau_id;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public int getExprience_id() {
+        return exprience_id;
+    }
+    private int niveau_id;
+    private int type_id;
+    private int exprience_id;
+
     public Collection<Candidature> getCandidatureCollection() {
         return candidatureCollection;
     }
@@ -224,5 +270,22 @@ public class Annonce implements Serializable {
     public String toString() {
         return "com.esprit.tunRecrut.entities.Annonce[ id=" + id + " ]";
     }
+
+    private int user_id;
+    public void setUserId(int id) {
+        this.user_id = id;
+    }
+
+    public int getUserId() {
+       return this.user_id;
+    }
+    private int[] metier_ids;
+    public int[] getMetier(){
+        return this.metier_ids;
+    }
     
+    public void setMetier(int[] ids){
+        this.metier_ids = ids;
+    }
+
 }

@@ -35,15 +35,10 @@ public class UserController {
             if (user.getType() == 1) {
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
-                
-                Session s = new Session();
-                s.setUser(user);
-                System.out.println("test = " + s.getUser().getFirstName());
             } else if (user.getType() == 2) {
+
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
-                //Session s = new Session(user);
-            
             }
         } else {
             JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");

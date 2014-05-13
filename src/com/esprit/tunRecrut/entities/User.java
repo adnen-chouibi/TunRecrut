@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.esprit.tunRecrut.entities;
 
 import java.io.Serializable;
@@ -34,6 +33,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +73,8 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "region_id")
     private String region_id;
-    
+    private int nbUserByCategorie;
+
     public User() {
     }
 
@@ -193,9 +194,18 @@ public class User implements Serializable {
     public void setRegionId(Region regionId) {
         this.regionId = regionId;
     }
-    
+
     public void setRegionId(String regionId) {
         this.region_id = regionId;
+    }
+    private int active;
+
+    public int getActive() {
+        return this.active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
     }
 
     @Override
@@ -222,5 +232,13 @@ public class User implements Serializable {
     public String toString() {
         return "com.esprit.tunRecrut.entities.User[ id=" + id + " ]";
     }
-    
+
+    public void setNbUserByRegion(int nb) {
+        this.nbUserByCategorie = nb;
+    }
+
+    public int getNbUserByRegion() {
+        return this.nbUserByCategorie;
+    }
+
 }

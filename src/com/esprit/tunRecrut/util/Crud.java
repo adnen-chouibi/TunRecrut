@@ -14,7 +14,7 @@ public class Crud {
     public boolean execute(String sql){
         try {
             Statement statement = mc.getConnection().createStatement();
-            statement.executeUpdate(sql);
+           statement.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
@@ -34,6 +34,17 @@ public class Crud {
         }
 
     }
+    
+     public int executeWithReturnId(String sql){
+        try {
+            Statement statement = mc.getConnection().createStatement();
+    return  statement.executeUpdate(sql, statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
 
     
 }
