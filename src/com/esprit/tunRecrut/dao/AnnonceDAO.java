@@ -9,6 +9,12 @@ import com.esprit.tunRecrut.entities.Annonce;
 import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.util.Crud;
 import com.esprit.tunRecrut.util.MD5;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +29,8 @@ public class AnnonceDAO {
         String sql
                 = "INSERT INTO  annonce (name,type,content,is_active,contrat_id,experience_id,type_emploi_id,niveau_id,region_id,user_id) VALUES"
                 + " ('" + annonce.getName() + "',1,'" + annonce.getContent() + "','" + annonce.getIsActive() + "','" + annonce.getContrat_id() + "','" + annonce.getExprience_id() + "','" + annonce.getType_id() + "','" + annonce.getNiveau_id() + "','" + annonce.getRegion_id() + "'," + annonce.getUserId() + ")";
-        int annonce_id = crud.executeWithReturnId(sql);
+        crud.execute(sql);
+        int annonce_id = this.getIdOfLastSavedAnnonce();
         for (int i = 0; i < annonce.getMetier().length; i++) {
             sql = "insert into annonce_has_metier(annonce_id, metier_id) values (" + annonce_id + "," + annonce.getMetier()[i] + ")";
             crud.execute(sql);
@@ -31,4 +38,137 @@ public class AnnonceDAO {
 
         return true;
     }
+
+    public int getIdOfLastSavedAnnonce() {
+        try {
+            String sql = "SELECT * FROM annonce order by id  DESC";
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                return (rs.getInt("id"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RegionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        return 0;
+    }
+
+    public List<Annonce> getAllOffre(String text, int contrat_id, int experience_id, int type_id, int niveau_id, int region_id, int type) {
+        RegionDAO region_dao = new RegionDAO();
+        String req = "select * from annonce a "
+                + " inner join contrat c on a.contrat_id = c.id"
+                + " inner join experience e on a.experience_id = e.id"
+                + " inner join niveau n on a.niveau_id = n.id"
+                + " inner join region r on a.region_id = r.id"
+                + " inner join type_emploi t on a.type_emploi_id = t.id"
+                + " inner join user u on a.user_id = u.id"
+                + " where a.type = " + type;
+        if (text != "") {
+            req = req + " and (a.name LIKE '%" + text + "%' or a.content LIKE '%" + text + "%')";
+        }
+        if (contrat_id != 0) {
+            req = req + " and a.contrat_id = " + contrat_id;
+        }
+        if (experience_id != 0) {
+            req = req + " and a.experience_id = " + experience_id;
+        }
+        if (type_id != 0) {
+            req = req + " and a.type_emploi_id = " + type_id;
+        }
+        if (niveau_id != 0) {
+            req = req + " and a.niveau_id = " + niveau_id;
+        }
+        if (region_id != 0) {
+            req = req + " and a.region_id = " + region_id;
+        }
+        System.out.println(req);
+        List<Annonce> annonces = new ArrayList<Annonce>();
+        Annonce annonce;
+        try {
+            ResultSet rs = crud.exeRead(req);
+            while (rs.next()) {
+                annonce = new Annonce();
+                annonce.setId(rs.getInt("id"));
+                annonce.setName(rs.getString("name"));
+                annonce.setType(type);
+                annonce.setContent(rs.getString("content"));
+                annonce.setIsActive(rs.getInt("is_active"));
+                annonce.setContrat(rs.getString("c.nom"));
+                annonce.setExperience(rs.getString("e.nom"));
+                annonce.setNiveau(rs.getString("n.nom"));
+                annonce.setRegion(rs.getString("r.name"));
+                annonce.setType_emploi(rs.getString("t.nom"));
+                if (type == 1) {
+                    annonce.setUser(rs.getString("u.first_name") + " " + rs.getString("u.last_name"));
+                }
+                if (type == 2) {
+                    annonce.setUser(rs.getString("u.raison_social"));
+                }
+
+                annonces.add(annonce);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return annonces;
+    }
+
+    public boolean DeactivateOffre(int id) {
+         try {
+            String sql
+                    = "UPDATE  annonce set is_active=0 where id=" + id;
+            return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+    }
+    
+     public boolean ActivateOffre(int id) {
+        try {
+            String sql
+                    = "UPDATE  annonce set is_active=1 where id=" + id;
+            return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+    }
+     
+      public boolean DeleteOffre(int id) {
+        try {
+            String sql
+                    = "DELETE FROM annonce WHERE id=" + id;
+            return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+    }
+       public List<Annonce> getAllOffre() {
+        
+        String req = "select e.nom, a.experience_id, count(*) nb from annonce a inner join experience e on a.experience_id = e.id  where a.type=1 group by a.experience_id ";
+        List<Annonce> annonces = new ArrayList<Annonce>();
+        Annonce annonce;
+        try {
+            ResultSet rs = crud.exeRead(req);
+            while (rs.next()) {
+                annonce = new Annonce();
+                
+                annonce.setExperience(rs.getString("e.nom"));
+                
+               annonce.setNbAnnonceByExperience(rs.getInt("nb"));
+              
+
+                annonces.add(annonce);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return annonces;
+    }
+
 }

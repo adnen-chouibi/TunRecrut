@@ -5,6 +5,7 @@
  */
 package com.esprit.tunRecrut.test;
 
+import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.dao.UserDAO;
 /**
@@ -30,6 +31,8 @@ public class TestUser {
 //        UserDAO userdao = new UserDAO();
 //        userdao.Authentification(user);
 //        System.out.println(user.getFax());
+        AnnonceDAO a = new AnnonceDAO();
+        a.getAllOffre("", 1, 0, 0, 0, 0, 1);
 
     }
 

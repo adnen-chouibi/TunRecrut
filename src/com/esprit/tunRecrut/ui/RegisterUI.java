@@ -377,7 +377,7 @@ public final class RegisterUI extends javax.swing.JFrame {
 
         // }
         UserController user_controller = new UserController();
-        user_controller.RegisterAction(user);
+        user_controller.RegisterAction(user, this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void employerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employerMouseClicked
