@@ -8,6 +8,7 @@ package com.esprit.tunRecrut.ui.administrateur;
 import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.dao.UserDAO;
 import com.esprit.tunRecrut.ui.LoginUI;
+import com.esprit.tunRecrut.ui.OffreShowUI;
 
 /**
  *
@@ -396,7 +397,7 @@ public class ListOffre extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         if (evt.getClickCount() == 2) {
             Object offre_id = jTable1.getValueAt(row, 0);
-            new showOffreUI(offre_id.hashCode()).setVisible(true);
+            new OffreShowUI(offre_id.hashCode()).setVisible(true);
         } else {
             Object candidat_id = jTable1.getValueAt(row, 1);
             supprimer.setEnabled(true);
@@ -466,40 +467,40 @@ public class ListOffre extends javax.swing.JFrame {
         new ListOffre().setVisible(true);
     }//GEN-LAST:event_goToOffreActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListOffre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListOffre().setVisible(true);
-            }
-        });
-    }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new ListOffre().setVisible(true);
+                }
+            });
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Logout;

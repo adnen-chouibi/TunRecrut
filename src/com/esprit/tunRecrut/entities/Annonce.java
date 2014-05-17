@@ -6,6 +6,7 @@
 package com.esprit.tunRecrut.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -62,7 +63,7 @@ public class Annonce implements Serializable {
         @JoinColumn(name = "annonce_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "metier_id", referencedColumnName = "id")})
     @ManyToMany
-    private Collection<Metier> metierCollection;
+    private ArrayList<Metier> metierCollection;
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Region regionId;
@@ -80,6 +81,8 @@ public class Annonce implements Serializable {
     private Contrat contratId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "annonce")
     private Collection<Candidature> candidatureCollection;
+    
+    
 
     public Annonce() {
     }
@@ -144,11 +147,11 @@ public class Annonce implements Serializable {
         this.isActive = isActive;
     }
 
-    public Collection<Metier> getMetierCollection() {
+    public ArrayList<Metier> getMetierCollection() {
         return metierCollection;
     }
 
-    public void setMetierCollection(Collection<Metier> metierCollection) {
+    public void setMetierCollection(ArrayList<Metier> metierCollection) {
         this.metierCollection = metierCollection;
     }
 
@@ -294,6 +297,7 @@ public class Annonce implements Serializable {
     String user;
     String experience;
     String type_emploi;
+    User userObject;
 
     public String getType_emploi() {
         return type_emploi;
@@ -353,7 +357,12 @@ int nbAnnonceByExperience;
     public void setNbAnnonceByExperience(int nbAnnonceByExperience) {
         this.nbAnnonceByExperience = nbAnnonceByExperience;
     }
-   
 
-    
+    public void setUserObject(User user) {
+        userObject = user;
+    }
+
+    public User getUserObject() {
+        return userObject;
+    }
 }

@@ -38,7 +38,13 @@ public class Crud {
      public int executeWithReturnId(String sql){
         try {
             Statement statement = mc.getConnection().createStatement();
-    return  statement.executeUpdate(sql, statement.RETURN_GENERATED_KEYS);
+            statement.executeUpdate(sql, statement.RETURN_GENERATED_KEYS);
+            int key=-1;
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getInt(1);
+            }
+            return key;
         } catch (SQLException ex) {
             Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
             return 0;

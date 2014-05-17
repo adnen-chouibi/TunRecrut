@@ -332,5 +332,10 @@ public class UserDAO {
 
         return users;
     }
+    
+    public boolean isInUserCandidatures(int annonce_id) {
+        
+        return false;        
+    }
 
 }

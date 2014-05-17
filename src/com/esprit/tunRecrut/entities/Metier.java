@@ -89,7 +89,7 @@ public class Metier implements Serializable {
 
     @Override
     public String toString() {
-        return "com.esprit.tunRecrut.entities.Metier[ id=" + id + " ]";
+        return nom;
     }
     
 }

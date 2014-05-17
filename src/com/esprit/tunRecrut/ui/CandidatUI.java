@@ -5,6 +5,8 @@
  */
 
 package com.esprit.tunRecrut.ui;
+import com.esprit.tunRecrut.util.Session;
+
 
 import com.esprit.tunRecrut.util.Session;
 
@@ -23,7 +25,7 @@ public class CandidatUI extends javax.swing.JFrame {
         System.out.println(session.getUser().getFirstName());
         user.setText(session.getUser().getFirstName());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,6 +113,9 @@ public class CandidatUI extends javax.swing.JFrame {
                 .addContainerGap(116, Short.MAX_VALUE))
         );
 
+        Session s = new Session();
+        use_home_label.setText(s.getUser().getFirstName());
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -167,8 +172,10 @@ public class CandidatUI extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton disconnectjButton;
     private javax.swing.JButton goToListOffersjButton;
     private javax.swing.JButton goTolProfilejButton;
     private javax.swing.JButton jButton1;

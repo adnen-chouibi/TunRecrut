@@ -20,6 +20,7 @@ import com.esprit.tunRecrut.entities.Niveau;
 import com.esprit.tunRecrut.entities.Region;
 import com.esprit.tunRecrut.entities.TypeEmploi;
 import com.esprit.tunRecrut.util.Session;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -185,11 +186,9 @@ public class AddAnnonceUI extends javax.swing.JFrame {
         annonce.setNiveau_id(niveau.getSelectedIndex());
         annonce.setIsActive(0);
         annonce.setUserId(new Session().getUser().getId());
-        int[] selectedIx = metier.getSelectedIndices();
-        int[] ids = metier.getSelectedIndices();;
-        annonce.setMetier(ids);
-        System.out.println(ids[1]);
-        annonce.setMetierCollection(null);
+        annonce.setType(new Session().getUser().getType());
+        List<Metier> ids = metier.getSelectedValuesList();
+        annonce.setMetierCollection((ArrayList<Metier>) ids);
         System.out.println(annonce.getName());
         AnnonceDAO annancedao = new AnnonceDAO();
         annancedao.saveAnnonce(annonce);
@@ -300,13 +299,12 @@ public class AddAnnonceUI extends javax.swing.JFrame {
     }
 
     public void initMetier() {
-        DefaultListModel listModel;
-        listModel = new DefaultListModel();
+        DefaultListModel<Metier> listModel=new DefaultListModel<>();
         MetierDAO regiondao = new MetierDAO();
         List<Metier> regions = regiondao.getAllMetier();
         for (Metier region : regions) {
-            listModel.addElement(region.getNom());
+            listModel.addElement(region);
         }
-
+        metier.setModel(listModel);
     }
 }
