@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.esprit.tunRecrut.dao;
 
 import com.esprit.tunRecrut.entities.Annonce;
@@ -22,9 +21,9 @@ import java.util.logging.Logger;
  * @author app4mob
  */
 public class AnnonceDAO {
+
     Crud crud = new Crud();
-    
-    
+
     public boolean saveAnnonce(Annonce annonce) {
         System.out.println();
         String sql
@@ -57,14 +56,17 @@ public class AnnonceDAO {
     public List<Annonce> getAllOffre(String text, int contrat_id, int experience_id, int type_id, int niveau_id, int region_id, int type) {
         RegionDAO region_dao = new RegionDAO();
         String req = "select * from annonce a "
-                + " inner join contrat c on a.contrat_id = c.id"
-                + " inner join experience e on a.experience_id = e.id"
-                + " inner join niveau n on a.niveau_id = n.id"
-                + " inner join region r on a.region_id = r.id"
-                + " inner join type_emploi t on a.type_emploi_id = t.id"
-                + " inner join user u on a.user_id = u.id"
+                + " left join contrat c on a.contrat_id = c.id"
+                + " left join experience e on a.experience_id = e.id"
+                + " left join niveau n on a.niveau_id = n.id"
+                + " left join region r on a.region_id = r.id"
+                + " left join type_emploi t on a.type_emploi_id = t.id"
+                + " left join user u on a.user_id = u.id"
                 + " where a.type = " + type;
-        if (text != "") {
+
+        System.out.println("text = " + text);
+
+        if (!text.equals("")) {
             req = req + " and (a.name LIKE '%" + text + "%' or a.content LIKE '%" + text + "%')";
         }
         if (contrat_id != 0) {
@@ -116,7 +118,7 @@ public class AnnonceDAO {
     }
 
     public boolean DeactivateOffre(int id) {
-         try {
+        try {
             String sql
                     = "UPDATE  annonce set is_active=0 where id=" + id;
             return crud.execute(sql);
@@ -125,8 +127,8 @@ public class AnnonceDAO {
             return false;
         }
     }
-    
-     public boolean ActivateOffre(int id) {
+
+    public boolean ActivateOffre(int id) {
         try {
             String sql
                     = "UPDATE  annonce set is_active=1 where id=" + id;
@@ -136,8 +138,8 @@ public class AnnonceDAO {
             return false;
         }
     }
-     
-      public boolean DeleteOffre(int id) {
+
+    public boolean DeleteOffre(int id) {
         try {
             String sql
                     = "DELETE FROM annonce WHERE id=" + id;
@@ -147,20 +149,20 @@ public class AnnonceDAO {
             return false;
         }
     }
-       public List<Annonce> getAllOffre() {
-        
-        String req = "select e.nom, a.experience_id, count(*) nb from annonce a inner join experience e on a.experience_id = e.id  where a.type=1 group by a.experience_id ";
+
+    public List<Annonce> getAllOffre() {
+
+        String req = "select e.nom, a.experience_id, count(*) nb from annonce a left join experience e on a.experience_id = e.id  where a.type=1 group by a.experience_id ";
         List<Annonce> annonces = new ArrayList<Annonce>();
         Annonce annonce;
         try {
             ResultSet rs = crud.exeRead(req);
             while (rs.next()) {
                 annonce = new Annonce();
-                
+
                 annonce.setExperience(rs.getString("e.nom"));
-                
-               annonce.setNbAnnonceByExperience(rs.getInt("nb"));
-              
+
+                annonce.setNbAnnonceByExperience(rs.getInt("nb"));
 
                 annonces.add(annonce);
 
@@ -170,6 +172,73 @@ public class AnnonceDAO {
         }
 
         return annonces;
+    }
+
+    public Annonce getAnnonceById(int id) {
+
+        Annonce annonce = null;
+        try {
+
+            String sql = "select * from annonce a "
+                    + " left join contrat c on a.contrat_id = c.id"
+                    + " left join experience e on a.experience_id = e.id"
+                    + " left join niveau n on a.niveau_id = n.id"
+                    + " left join region r on a.region_id = r.id"
+                    + " left join type_emploi t on a.type_emploi_id = t.id"
+                    + " left join user u on a.user_id = u.id"
+                    + " WHERE a.id = " + id;
+
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                annonce = new Annonce();
+                annonce.setName(rs.getString("name"));
+                annonce.setContent(rs.getString("content"));
+                annonce.setContrat(rs.getString("c.nom"));
+                annonce.setExperience(rs.getString("e.nom"));
+                annonce.setNiveau(rs.getString("n.nom"));
+                annonce.setRegion(rs.getString("r.name"));
+                annonce.setType_emploi(rs.getString("t.nom"));
+                User user = new User(rs.getInt("u.id"), rs.getInt("u.type"), rs.getString("u.email_address"), rs.getString("u.raison_social"), rs.getString("u.tel"), rs.getString("u.fax"), rs.getString("u.address"));
+                annonce.setUserObject(user);
+                
+                //get annonce metiers
+                ArrayList<String> metiersByAnnonId = this.getMetiersByAnnonId(id);                
+                annonce.setMetierCollection(metiersByAnnonId);
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger("annonce controller").log(Level.SEVERE, " fail");
+            return null;
+        }
+
+        return annonce;
+    }
+
+    public ArrayList<String> getMetiersByAnnonId(int id) {
+
+        try {
+
+            String sql = "select * from annonce_has_metier ahm "
+                    + " left join metier m on m.id = ahm.metier_id"
+                    + " WHERE ahm.annonce_id = " + id;
+
+            ResultSet rs2 = crud.exeRead(sql);
+
+            ArrayList<String> stringList = new ArrayList<String>();
+
+            while (rs2.next()) {
+                stringList.add(rs2.getString("nom"));
+                System.out.println(rs2.getString("nom"));
+            }
+
+            return stringList;
+
+        } catch (SQLException ex) {
+            Logger.getLogger("annonce controller").log(Level.SEVERE, " fail");
+            return null;
+        }
+
     }
 
 }

@@ -88,12 +88,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="3" max="-2" attributes="0">
-                          <Component id="activer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="desactiver" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="supprimer" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                           <Component id="type" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="activer" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="desactiver" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="supprimer" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -215,21 +217,14 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="goToCharte" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="23" pref="23" max="-2" attributes="0"/>
-                          <Component id="goToCharte" min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" pref="70" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="Logout" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="Logout" alignment="0" min="-2" pref="91" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
