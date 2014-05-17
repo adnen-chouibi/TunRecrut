@@ -8,6 +8,7 @@ package com.esprit.tunRecrut.ui.administrateur;
 import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.dao.UserDAO;
 import com.esprit.tunRecrut.ui.LoginUI;
+import com.esprit.tunRecrut.ui.OffreShowUI;
 
 /**
  *
@@ -396,7 +397,7 @@ public class ListOffre extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         if (evt.getClickCount() == 2) {
             Object offre_id = jTable1.getValueAt(row, 0);
-            new showOffreUI(offre_id.hashCode()).setVisible(true);
+            new OffreShowUI(offre_id.hashCode()).setVisible(true);
         } else {
             Object candidat_id = jTable1.getValueAt(row, 1);
             supprimer.setEnabled(true);

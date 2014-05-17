@@ -169,29 +169,7 @@ public class AnnonceDAO {
         }
 
         return annonces;
-    }
-       
-        public Annonce getAnnonceById(int id) {
-
-        
-        Annonce annonce = null;
-        try {
-            String sql = "SELECT * FROM annonce WHERE id = " + id ;
-
-            ResultSet rs = crud.exeRead(sql);
-            while (rs.next()) {
-                annonce = new Annonce();
-                 annonce.setName(rs.getString("name"));
-                annonce.setContent(rs.getString("content"));
-
-            }
-            return annonce;
-
-        } catch (SQLException ex) {
-            Logger.getLogger("annonce controller").log(Level.SEVERE, " fail");
-            return null;
-        }
-    }
+    }      
 
     public Annonce getAnnonceById(int id) {
 
