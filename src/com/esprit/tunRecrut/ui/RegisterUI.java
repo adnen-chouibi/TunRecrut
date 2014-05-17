@@ -33,13 +33,19 @@ public final class RegisterUI extends javax.swing.JFrame {
         initRegion();
         nom.setText(user.getFirstName());
         prenom.setText(user.getLastName());
-        email.setText(user.getUsername()+"@gmail.com");
+        email.setText(user.getUsername() + "@gmail.com");
+        this.setLocationRelativeTo(null);
+        raison.setVisible(false);
+        raison_label.setVisible(false);
     }
-    
+
     public RegisterUI() {
         initComponents();
         initRegion();
         setTitle("Inscription");
+        this.setLocationRelativeTo(null);
+        raison.setVisible(false);
+        raison_label.setVisible(false);
     }
 
     public void initRegion() {
@@ -136,6 +142,7 @@ public final class RegisterUI extends javax.swing.JFrame {
 
         employer.setBackground(new java.awt.Color(255, 255, 255));
         type.add(employer);
+        employer.setSelected(true);
         employer.setText("Employer");
         employer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,10 +162,15 @@ public final class RegisterUI extends javax.swing.JFrame {
 
         employeur.setBackground(new java.awt.Color(255, 255, 255));
         type.add(employeur);
-        employeur.setText("Employeur");
+        employeur.setText("Enterprise");
         employeur.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 employeurStateChanged(evt);
+            }
+        });
+        employeur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeurActionPerformed(evt);
             }
         });
 
@@ -202,15 +214,6 @@ public final class RegisterUI extends javax.swing.JFrame {
 
         jLabel6.setText("Adresse:");
 
-        password.setText("password");
-        password.setText(initialPassword);
-        password.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (password.getText().equals(initialPassword)) {
-                    password.selectAll();
-                }
-            }
-        });
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
@@ -221,24 +224,26 @@ public final class RegisterUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(jSeparator2)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(password)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(raison)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fax, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(adresse, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(region_id, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(password)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fax, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(adresse, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(region_id, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(email, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -249,15 +254,17 @@ public final class RegisterUI extends javax.swing.JFrame {
                                     .addComponent(employeur)
                                     .addComponent(prenom, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(raison_label2)))
-                            .addComponent(raison_label)
                             .addComponent(raison_label1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(raison_label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(raison))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,11 +276,14 @@ public final class RegisterUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(employer)
                     .addComponent(employeur))
-                .addGap(13, 13, 13)
-                .addComponent(raison_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(raison, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(raison_label))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(raison, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(raison_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(raison_label2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -325,7 +335,7 @@ public final class RegisterUI extends javax.swing.JFrame {
 
     private void employerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employerActionPerformed
 //        String type = null;
-       if (employer.isSelected()) {
+        if (employer.isSelected()) {
             raison.setVisible(false);
             raison_label.setVisible(false);
         }
@@ -333,7 +343,7 @@ public final class RegisterUI extends javax.swing.JFrame {
             raison_label.setVisible(true);
             raison.setVisible(true);
         }        // TODO add your handling code here:
-      
+
         // JOptionPane.showMessageDialog(null, "set to flase");
     }//GEN-LAST:event_employerActionPerformed
 
@@ -370,10 +380,10 @@ public final class RegisterUI extends javax.swing.JFrame {
         user.setPassword(password.getText());
         Region region = new Region();
         RegionDAO region_dao = new RegionDAO();
-        region= region_dao.getRegionById(String.valueOf(region_id.getSelectedIndex()));
+        region = region_dao.getRegionById(String.valueOf(region_id.getSelectedIndex()));
         // if(region_id.getSelectedIndex()){
-       // user.setRegionId();
-       user.setRegionId(region);
+        // user.setRegionId();
+        user.setRegionId(region);
 
         // }
         UserController user_controller = new UserController();
@@ -393,12 +403,16 @@ public final class RegisterUI extends javax.swing.JFrame {
         if (employeur.isSelected()) {
             raison_label.setVisible(true);
             raison.setVisible(true);
-        }   
+        }
     }//GEN-LAST:event_employeurStateChanged
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
+
+    private void employeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_employeurActionPerformed
 
     /**
      * @param args the command line arguments

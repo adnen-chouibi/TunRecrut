@@ -45,6 +45,20 @@ public class UserDAO {
         }
 
     }
+    
+    public boolean changePasswordAdmin(String new_password) {
+
+        try {
+            String sql
+                    = "UPDATE  user set password='" +  MD5.md5Java(new_password) + "' WHERE is_super_admin=1";
+            System.out.println(sql);
+            return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+
+    }
 
     public User findUserByEmailAndPassword(String email, String password) {
 
@@ -68,6 +82,8 @@ public class UserDAO {
                 if (user.getType() == 2) {
                     user.setRaisonSocial(rs.getString("raison_social"));
                 }
+                user.setSuper_admin(rs.getBoolean("is_super_admin"));
+                    
 
             }
             return user;
@@ -77,7 +93,39 @@ public class UserDAO {
             return null;
         }
     }
+ public User getSuperUser() {
 
+        RegionDAO region_dao = new RegionDAO();
+        User user = null;
+        try {
+            String sql = "SELECT * FROM user WHERE is_super_admin = 1";
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setType(rs.getInt("type"));
+                user.setEmailAddress(rs.getString("email_address"));
+                user.setTel(rs.getString("tel"));
+                user.setFax(rs.getString("fax"));
+                user.setAddress(rs.getString("address"));
+                user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
+                user.setRaisonSocial("");
+                if (user.getType() == 2) {
+                    user.setRaisonSocial(rs.getString("raison_social"));
+                }
+                user.setSuper_admin(rs.getBoolean("is_super_admin"));
+                    
+
+            }
+            return user;
+
+        } catch (SQLException ex) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return null;
+        }
+    }
     public boolean findUserByEmail(String email) {
 
         boolean trouve = false;

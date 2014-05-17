@@ -353,4 +353,7 @@ int nbAnnonceByExperience;
     public void setNbAnnonceByExperience(int nbAnnonceByExperience) {
         this.nbAnnonceByExperience = nbAnnonceByExperience;
     }
+   
+
+    
 }

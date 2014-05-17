@@ -4,6 +4,8 @@
  */
 package com.esprit.tunRecrut.util;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author MohamedAmine
@@ -17,7 +19,7 @@ public class Mail {
     private String mailAddressRecipient ; 
     private String mailObject ;
     private String mailSubject ;
-
+    private ArrayList<String> mailAddressRecipientMultiple;
     public String getMailAddressSender() {
         return mailAddressSender;
     }
@@ -37,9 +39,16 @@ public class Mail {
     public String getMailAddressRecipient() {
         return mailAddressRecipient;
     }
-
     public void setMailAddressRecipient(String mailAddressRecipient) {
         this.mailAddressRecipient = mailAddressRecipient;
+    }
+    
+    public void setMailAddressRecipientMultiple(ArrayList<String> mailAddressRecipient) {
+        this.mailAddressRecipientMultiple = mailAddressRecipient;
+    }
+    
+     public ArrayList<String> getMailAddressRecipientMultiple() {
+        return mailAddressRecipientMultiple;
     }
 
     public String getMailObject() {

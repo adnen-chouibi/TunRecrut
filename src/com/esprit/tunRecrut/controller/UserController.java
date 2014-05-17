@@ -10,9 +10,12 @@ import com.esprit.tunRecrut.entities.User;
 import com.esprit.tunRecrut.ui.CandidatUI;
 import com.esprit.tunRecrut.ui.EditProfileUI;
 import com.esprit.tunRecrut.ui.LoginUI;
+import com.esprit.tunRecrut.ui.administrateur.ListeCondidat;
 import com.esprit.tunRecrut.util.Session;
+import static javax.management.Query.and;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import static org.eclipse.persistence.expressions.ExpressionOperator.and;
 
 /**
  *
@@ -45,6 +48,31 @@ public class UserController {
             JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");
         }
     }
+    static int i = 0;
+
+    public void authentificationAdminAction(User user, JFrame login_ui) {
+
+        UserDAO uDao = new UserDAO();
+        Session session = new Session();
+        user = uDao.findUserByEmailAndPassword(user.getEmailAddress(), user.getPassword());
+        if (user != null && user.isSuper_admin()) {
+
+            System.out.println("admin connecté avec success");
+            session.setUser(user);
+            login_ui.setVisible(false);
+
+            ListeCondidat candidat_ui = new ListeCondidat();
+            candidat_ui.setVisible(true);
+        } else {
+            i++;
+            JOptionPane.showMessageDialog(null, "Votre login et mot de passe sont incorrecte ");
+            if (i >= 3) {
+                login_ui.setVisible(false);
+                new LoginUI().setVisible(true);
+            }
+        }
+
+    }
 
     public void RegisterAction(User user, JFrame register_ui) {
         UserDAO uDao = new UserDAO();
@@ -62,7 +90,7 @@ public class UserController {
                     CandidatUI candidat_ui = new CandidatUI();
                     candidat_ui.setVisible(true);
                 }
-                
+
                 register_ui.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Votre Compte à été crée avec succes");
             } else {

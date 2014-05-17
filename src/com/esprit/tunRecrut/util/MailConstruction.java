@@ -83,6 +83,54 @@ public class MailConstruction {
 
     }
 
+    
+     public void getMailMessageWithMultipleReceiver(String pieceJointe, final Mail mail) {
+        try {
+            this.session = Session.getInstance(this.properties,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(mail.getMailAddressSender(), mail.getPwd());
+                        }
+                    });
+            this.message = new MimeMessage(this.session);
+            InternetAddress[] recipient = new InternetAddress[mail.getMailAddressRecipientMultiple().size()];
+              for (int i = 0; i < mail.getMailAddressRecipientMultiple().size(); i++)
+            {
+                recipient[i] = new InternetAddress(mail.getMailAddressRecipientMultiple().get(i));
+            }
+            this.message.setRecipients(Message.RecipientType.TO, recipient);
+            this.message.setSubject(mail.getMailSubject());
+
+            /**
+             * Partie 1: Le texte
+             */
+            MimeBodyPart mbp1 = new MimeBodyPart();
+            mbp1.setText(mail.getMailObject());
+
+             // On regroupe les deux dans le message
+            /**
+             * Le fichier joint
+             */
+             MimeMultipart mp = new MimeMultipart();
+             MimeBodyPart mbp2 = new MimeBodyPart();
+            System.out.println(pieceJointe);
+            if (!pieceJointe.equalsIgnoreCase("")) {
+               
+                String file = pieceJointe;
+                mbp2.attachFile(file);
+               
+                mp.addBodyPart(mbp2);
+            }
+                mp.addBodyPart(mbp1);
+            this.message.setContent(mp);
+        } catch (IOException ex) {
+            Logger.getLogger(MailConstruction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(MailConstruction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void SendMessage() {
         try {
             Transport.send(this.message);

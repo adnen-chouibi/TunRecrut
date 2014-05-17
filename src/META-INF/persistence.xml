@@ -20,6 +20,7 @@
     <class>test.Annonce</class>
     <class>test.User</class>
     <class>test.Experience</class>
+    <class>com.esprit.tunRecrut.entities.Newslettre</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tun_recrut?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>

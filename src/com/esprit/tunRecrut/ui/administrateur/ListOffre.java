@@ -7,6 +7,7 @@ package com.esprit.tunRecrut.ui.administrateur;
 
 import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.dao.UserDAO;
+import com.esprit.tunRecrut.ui.LoginUI;
 
 /**
  *
@@ -19,23 +20,24 @@ public class ListOffre extends javax.swing.JFrame {
      */
     public ListOffre() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
-private String keyword = "";
-private int contrat_id = 0;
-private int experience_id= 0;
-private int type_id = 0;
-private int niveau_id = 0;
-private int region_id =0;
+    private String keyword = "";
+    private int contrat_id = 0;
+    private int experience_id = 0;
+    private int type_id = 0;
+    private int niveau_id = 0;
+    private int region_id = 0;
 
     public void setFilter(String keyword, int contrat_id, int experience_id, int type_id, int niveau_id, int region_id) {
         jTable1.setModel(new ListeOffreTable(keyword, contrat_id, experience_id, type_id, niveau_id, region_id, type.getSelectedIndex()));
-        jScrollPane1.setViewportView(jTable1); 
+        jScrollPane1.setViewportView(jTable1);
         this.keyword = keyword;
-        this.contrat_id= contrat_id;
-        this.experience_id= experience_id;
-        this.niveau_id= niveau_id;
-        this.region_id=region_id;
-        this.type_id= type_id;
+        this.contrat_id = contrat_id;
+        this.experience_id = experience_id;
+        this.niveau_id = niveau_id;
+        this.region_id = region_id;
+        this.type_id = type_id;
     }
 
     /**
@@ -169,12 +171,13 @@ private int region_id =0;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(activer)
-                        .addComponent(desactiver, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(supprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(activer)
+                            .addComponent(desactiver, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(supprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
@@ -255,7 +258,7 @@ private int region_id =0;
 
         jLabel5.setText("Envoyer des news lettre");
 
-        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/jobs.png"))); // NOI18N
         goToOffre.setBorder(null);
         goToOffre.setBorderPainted(false);
         goToOffre.setContentAreaFilled(false);
@@ -274,17 +277,13 @@ private int region_id =0;
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -395,16 +394,22 @@ private int region_id =0;
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
-        Object candidat_id = jTable1.getValueAt(row, 1);
-        supprimer.setEnabled(true);
-        if (candidat_id.toString() == "En cours") {
-            desactiver.setEnabled(false);
-            activer.setEnabled(true);
+        if (evt.getClickCount() == 2) {
+            Object offre_id = jTable1.getValueAt(row, 0);
+            new showOffreUI(offre_id.hashCode()).setVisible(true);
+        } else {
+            Object candidat_id = jTable1.getValueAt(row, 1);
+            supprimer.setEnabled(true);
+            if (candidat_id.toString() == "En cours") {
+                desactiver.setEnabled(false);
+                activer.setEnabled(true);
+            }
+            if (candidat_id.toString() == "Active") {
+                activer.setEnabled(false);
+                desactiver.setEnabled(true);
+            }
         }
-        if (candidat_id.toString() == "Active") {
-            activer.setEnabled(false);
-            desactiver.setEnabled(true);
-        }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void goToNewsLettreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNewsLettreActionPerformed
@@ -415,6 +420,8 @@ private int region_id =0;
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginUI().setVisible(true);
     }//GEN-LAST:event_LogoutActionPerformed
 
     private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed
@@ -443,7 +450,7 @@ private int region_id =0;
 
     private void typePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_typePropertyChange
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_typePropertyChange
 
     private void typeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_typeItemStateChanged
@@ -456,7 +463,7 @@ private int region_id =0;
     private void goToOffreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToOffreActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-       new ListOffre().setVisible(true);
+        new ListOffre().setVisible(true);
     }//GEN-LAST:event_goToOffreActionPerformed
 
     /**
