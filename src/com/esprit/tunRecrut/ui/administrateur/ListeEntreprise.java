@@ -6,6 +6,7 @@
 package com.esprit.tunRecrut.ui.administrateur;
 
 import com.esprit.tunRecrut.dao.UserDAO;
+import com.esprit.tunRecrut.ui.LoginUI;
 import java.awt.event.ActionListener;
 import static java.lang.Thread.sleep;
 import java.util.Timer;
@@ -25,6 +26,8 @@ public class ListeEntreprise extends javax.swing.JFrame {
      */
     public ListeEntreprise() {
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -170,7 +173,7 @@ public class ListeEntreprise extends javax.swing.JFrame {
 
         jLabel5.setText("Envoyer des news lettre");
 
-        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/jobs.png"))); // NOI18N
         goToOffre.setBorder(null);
         goToOffre.setBorderPainted(false);
         goToOffre.setContentAreaFilled(false);
@@ -259,17 +262,13 @@ public class ListeEntreprise extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(goToCharte, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -367,7 +366,7 @@ public class ListeEntreprise extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         Object candidat_id = jTable1.getValueAt(row, 0);
         UserDAO userdao = new UserDAO();
-   
+
         userdao.DeactivateUser(candidat_id.hashCode());
         jTable1.setModel(new ListeEntrepriseTable(keyword.getText()));
         jScrollPane1.setViewportView(jTable1);
@@ -435,7 +434,9 @@ public class ListeEntreprise extends javax.swing.JFrame {
     }//GEN-LAST:event_goToNewsLettreActionPerformed
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        // TODO add your handling code here:
+
+        this.setVisible(false);
+        new LoginUI().setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_LogoutActionPerformed
 
     private void goToCharteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCharteActionPerformed

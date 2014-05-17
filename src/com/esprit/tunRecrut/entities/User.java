@@ -252,5 +252,13 @@ public class User implements Serializable {
     public int getNbUserByRegion() {
         return this.nbUserByCategorie;
     }
+ boolean super_admin;
 
+    public boolean isSuper_admin() {
+        return super_admin;
+    }
+
+    public void setSuper_admin(boolean super_admin) {
+        this.super_admin = super_admin;
+    }
 }

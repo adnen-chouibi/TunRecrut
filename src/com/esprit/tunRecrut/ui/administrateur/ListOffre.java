@@ -7,6 +7,7 @@ package com.esprit.tunRecrut.ui.administrateur;
 
 import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.dao.UserDAO;
+import com.esprit.tunRecrut.ui.LoginUI;
 
 /**
  *
@@ -19,6 +20,7 @@ public class ListOffre extends javax.swing.JFrame {
      */
     public ListOffre() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     private String keyword = "";
     private int contrat_id = 0;
@@ -256,7 +258,7 @@ public class ListOffre extends javax.swing.JFrame {
 
         jLabel5.setText("Envoyer des news lettre");
 
-        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/jobs.png"))); // NOI18N
         goToOffre.setBorder(null);
         goToOffre.setBorderPainted(false);
         goToOffre.setContentAreaFilled(false);
@@ -392,16 +394,22 @@ public class ListOffre extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.getSelectedRow();
-        Object candidat_id = jTable1.getValueAt(row, 1);
-        supprimer.setEnabled(true);
-        if (candidat_id.toString() == "En cours") {
-            desactiver.setEnabled(false);
-            activer.setEnabled(true);
+        if (evt.getClickCount() == 2) {
+            Object offre_id = jTable1.getValueAt(row, 0);
+            new showOffreUI(offre_id.hashCode()).setVisible(true);
+        } else {
+            Object candidat_id = jTable1.getValueAt(row, 1);
+            supprimer.setEnabled(true);
+            if (candidat_id.toString() == "En cours") {
+                desactiver.setEnabled(false);
+                activer.setEnabled(true);
+            }
+            if (candidat_id.toString() == "Active") {
+                activer.setEnabled(false);
+                desactiver.setEnabled(true);
+            }
         }
-        if (candidat_id.toString() == "Active") {
-            activer.setEnabled(false);
-            desactiver.setEnabled(true);
-        }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void goToNewsLettreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToNewsLettreActionPerformed
@@ -412,6 +420,8 @@ public class ListOffre extends javax.swing.JFrame {
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginUI().setVisible(true);
     }//GEN-LAST:event_LogoutActionPerformed
 
     private void gotToCandidatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotToCandidatActionPerformed

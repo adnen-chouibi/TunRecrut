@@ -20,12 +20,12 @@ public class PieChart extends JFrame {
     public PieChart() {
         dataset = new DefaultPieDataset();
 //Statique
-         List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<User>();
         UserDAO userdao = new UserDAO();
-       users =  userdao.getAllUser();
+        users = userdao.getAllUser();
         for (User user : users) {
-            System.out.println(user.getRegionId().getName()+" "+user.getNbUserByRegion());
-             dataset.setValue(user.getRegionId().getName(), user.getNbUserByRegion());
+            System.out.println(user.getRegionId().getName() + " " + user.getNbUserByRegion());
+            dataset.setValue(user.getRegionId().getName(), user.getNbUserByRegion());
         }
 //        dataset.setValue("Java", new Double(20.0));
 //        dataset.setValue("BD", new Double(20.0));
@@ -35,18 +35,20 @@ public class PieChart extends JFrame {
         graphe = ChartFactory.createPieChart3D("Exemple Camemberg", dataset, true, true, false);
         cp = new ChartPanel(graphe);
         this.add(cp);
+        this.setLocationRelativeTo(null);
+
     }
 
     public void showStatestique() {
         PieChart pchart = new PieChart();
-        pchart.setSize(500,400);
+        pchart.setSize(500, 400);
         pchart.setVisible(true);
 
     }
 
     public static void main(String args[]) {
         PieChart pchart = new PieChart();
-        pchart.setSize(500,400);
+        pchart.setSize(500, 400);
         pchart.setVisible(true);
     }
 }

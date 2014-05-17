@@ -80,7 +80,6 @@ public class AddAnnonceUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Déposer offre d'emploi");
-        setMaximumSize(new java.awt.Dimension(600, 2147483647));
 
         region_id.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--- Selectionnez un région ---" }));
 

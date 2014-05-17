@@ -75,6 +75,7 @@ public class StatistiqueUI extends javax.swing.JFrame {
         pack();
         //  this.add(cp);
         this.setSize(1000, 650);
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -146,7 +147,7 @@ public class StatistiqueUI extends javax.swing.JFrame {
             }
         });
 
-        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/liste-etreprise.png"))); // NOI18N
+        goToOffre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/jobs.png"))); // NOI18N
         goToOffre.setBorder(null);
         goToOffre.setBorderPainted(false);
         goToOffre.setContentAreaFilled(false);

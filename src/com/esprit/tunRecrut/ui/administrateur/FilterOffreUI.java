@@ -34,6 +34,7 @@ public class FilterOffreUI extends javax.swing.JFrame {
      */
     public FilterOffreUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     FilterOffreUI(ListOffre frame) {
