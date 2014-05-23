@@ -43,5 +43,11 @@ public class NewsLettreDAO {
 
         return emails;
     }
+     public boolean saveEmail(String email) {
+        System.out.println();
+        String sql
+                = "INSERT INTO  newslettre (email) VALUES ('" + email + "')";
+        return crud.execute(sql);
+    }
 
 }

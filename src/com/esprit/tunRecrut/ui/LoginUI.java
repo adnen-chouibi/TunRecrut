@@ -62,6 +62,9 @@ public class LoginUI extends javax.swing.JFrame {
         NativeInterface.initialize();
         currentFrame  =this;
         this.setLocationRelativeTo(null);
+        System.out.println(System.getProperty("user.dir"));
+        email.setText("adnen.chouibi@gmail.com");
+        password.setText("2137");
         
     }
 
@@ -167,7 +170,7 @@ public class LoginUI extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Tunisie Recrute");
+        jLabel3.setText("Tunisie Recrut");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
