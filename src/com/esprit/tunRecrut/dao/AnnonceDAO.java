@@ -145,6 +145,16 @@ public class AnnonceDAO {
             return false;
         }
     }
+    
+    public boolean DeleteFavori(int annonce_id, int user_id) {
+        try {
+            String sql = "DELETE FROM user_has_favori WHERE user_id= " + user_id + " AND annonce_id = " + annonce_id;
+            return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+    }
 
     public List<Annonce> getAllOffre() {
 
@@ -237,6 +247,52 @@ public class AnnonceDAO {
             return null;
         }
 
+    }
+    
+    public List<Annonce> getAllFavoris(int user_id, int type) {
+        RegionDAO region_dao = new RegionDAO();
+        String req = "select * from annonce a "
+                + " left join contrat c on a.contrat_id = c.id"
+                + " left join experience e on a.experience_id = e.id"
+                + " left join niveau n on a.niveau_id = n.id"
+                + " left join region r on a.region_id = r.id"
+                + " left join type_emploi t on a.type_emploi_id = t.id"
+                + " left join user u on a.user_id = u.id"
+                + " inner join user_has_favori fav on fav.annonce_id = a.id "
+                + " WHERE fav.user_id = " + user_id                
+                + " AND a.type = " + type;
+        
+        System.out.println(req);
+        List<Annonce> annonces = new ArrayList<Annonce>();
+        Annonce annonce;
+        try {
+            ResultSet rs = crud.exeRead(req);
+            while (rs.next()) {
+                annonce = new Annonce();
+                annonce.setId(rs.getInt("id"));
+                annonce.setName(rs.getString("name"));
+                annonce.setType(type);
+                annonce.setContent(rs.getString("content"));
+                annonce.setIsActive(rs.getInt("is_active"));
+                annonce.setContrat(rs.getString("c.nom"));
+                annonce.setExperience(rs.getString("e.nom"));
+                annonce.setNiveau(rs.getString("n.nom"));
+                annonce.setRegion(rs.getString("r.name"));
+                annonce.setType_emploi(rs.getString("t.nom"));
+                if (type == 1) {
+                    annonce.setUser(rs.getString("u.first_name") + " " + rs.getString("u.last_name"));
+                }
+                if (type == 2) {
+                    annonce.setUser(rs.getString("u.raison_social"));
+                }
+
+                annonces.add(annonce);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return annonces;
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package com.esprit.tunRecrut.ui;
 
+import com.esprit.tunRecrut.controller.GenererPDFAnnonce;
 import com.esprit.tunRecrut.dao.AnnonceDAO;
 import com.esprit.tunRecrut.dao.ContratDAO;
 import com.esprit.tunRecrut.dao.ExprienceDAO;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -129,6 +131,7 @@ public class OffreUI extends javax.swing.JFrame {
         jSeparator18 = new javax.swing.JSeparator();
         saveAsPdfButton = new javax.swing.JButton();
         sendCandidatureButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -151,6 +154,11 @@ public class OffreUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/info.png"))); // NOI18N
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/back.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,7 +309,7 @@ public class OffreUI extends javax.swing.JFrame {
                                 .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(telLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -361,7 +369,7 @@ public class OffreUI extends javax.swing.JFrame {
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator16, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,7 +491,7 @@ public class OffreUI extends javax.swing.JFrame {
                                     .addComponent(typeEmploiLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(regionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 60, Short.MAX_VALUE))
+                                .addGap(0, 72, Short.MAX_VALUE))
                             .addComponent(jSeparator18, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(jLabelOffreTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -543,6 +551,11 @@ public class OffreUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("Detail", jScrollPane2);
 
         saveAsPdfButton.setText("Enregistrer Pdf");
+        saveAsPdfButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsPdfButtonActionPerformed(evt);
+            }
+        });
 
         sendCandidatureButton.setText("Envoyer Candidature");
         sendCandidatureButton.addActionListener(new java.awt.event.ActionListener() {
@@ -550,6 +563,8 @@ public class OffreUI extends javax.swing.JFrame {
                 sendCandidatureButtonActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Ajouter aux favoris");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -559,23 +574,25 @@ public class OffreUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(sendCandidatureButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(saveAsPdfButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButtonAfficherOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTabbedPane1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(sendCandidatureButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(saveAsPdfButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonAfficherOffre, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -592,12 +609,13 @@ public class OffreUI extends javax.swing.JFrame {
                             .addComponent(user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAfficherOffre, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(saveAsPdfButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sendCandidatureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(saveAsPdfButton, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(sendCandidatureButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAfficherOffre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -625,10 +643,15 @@ public class OffreUI extends javax.swing.JFrame {
         Object candidat_id = jTable1.getValueAt(row, 0);
         System.out.println("id = " + candidat_id.hashCode());
         jButtonAfficherOffre.setEnabled(true);
-        
-        
+
         Object offre_id = jTable1.getValueAt(row, 0);
-         initLabels(offre_id.hashCode());
+        initLabels(offre_id.hashCode());
+
+        if (evt.getClickCount() == 2) {
+           
+            new OffreShowUI(candidat_id.hashCode());
+        }
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButtonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFilterActionPerformed
@@ -640,6 +663,7 @@ public class OffreUI extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         Object offre_id = jTable1.getValueAt(row, 0);
         new OffreShowUI(offre_id.hashCode());
+
     }//GEN-LAST:event_jButtonAfficherOffreActionPerformed
 
     private void exprienceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exprienceActionPerformed
@@ -660,29 +684,45 @@ public class OffreUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sendCandidatureButtonActionPerformed
 
-    
-     private void initLabels(int offre_id) {
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+
+        JDialog yourdialog = new aboutusJDialog(this, rootPaneCheckingEnabled);
+        yourdialog.setModal(true);
+        yourdialog.setVisible(true);
+
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void saveAsPdfButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsPdfButtonActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        Object offre_id = jTable1.getValueAt(row, 0);
+        GenererPDFAnnonce pdf = new GenererPDFAnnonce();
+        pdf.genratePDF(offre_id.hashCode());
+    }//GEN-LAST:event_saveAsPdfButtonActionPerformed
+
+    private void initLabels(int offre_id) {
         AnnonceDAO annonce_dao = new AnnonceDAO();
         Annonce annonce = annonce_dao.getAnnonceById(offre_id);
         System.out.println("titre = " + annonce.getName());
         jLabelOffreTitle.setText(annonce.getName());
         ArrayList<Metier> metierCollection = annonce.getMetierCollection();
-        
+
         String Secteur = "";
-        
-        for(Metier item: metierCollection){
-             if (item.getNom() == metierCollection.get(metierCollection.size() - 1).getNom())
+
+        for (Metier item : metierCollection) {
+            if (item.getNom() == metierCollection.get(metierCollection.size() - 1).getNom()) {
                 Secteur += item.getNom();
-             else
-                 Secteur += item.getNom() + " / ";
+            } else {
+                Secteur += item.getNom() + " / ";
+            }
         }
 
         secteurLabel.setText(Secteur);
-        
+
         descriptionLabel.setText("<html><p>" + annonce.getContent() + "<p/></html>");
         descriptionLabel.setFont(new Font("Serif", Font.BOLD, 15));
         descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
-        
+
         experienceLabel.setText(annonce.getExperience());
         contratLabel.setText(annonce.getContrat());
         niveauLabel.setText(annonce.getNiveau());
@@ -694,7 +734,7 @@ public class OffreUI extends javax.swing.JFrame {
         jLabelOffreTitle.setText(annonce.getName());
         raisonSocialLabel.setText(annonce.getUserObject().getRaisonSocial());
     }
-     
+
     /**
      * @param args the command line arguments
      */
@@ -801,6 +841,7 @@ public class OffreUI extends javax.swing.JFrame {
     private javax.swing.JLabel experienceLabel;
     private javax.swing.JComboBox exprience;
     private javax.swing.JLabel faxLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAfficherOffre;
     private javax.swing.JButton jButtonDeleteFilter;
     private javax.swing.JButton jButtonFilter;

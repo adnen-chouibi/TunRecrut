@@ -7,6 +7,7 @@ package com.esprit.tunRecrut.ui;
 
 import com.esprit.tunRecrut.dao.NewsLettreDAO;
 import com.esprit.tunRecrut.util.Session;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -56,6 +57,7 @@ public class CandidatUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -84,6 +86,11 @@ public class CandidatUI extends javax.swing.JFrame {
         jLabel4.setText("Mon Profil");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/favoris.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/newsLettre.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,6 +137,11 @@ public class CandidatUI extends javax.swing.JFrame {
         jLabel13.setText("Voir statistique");
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/esprit/tunRecrut/assets/info.png"))); // NOI18N
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -276,6 +288,19 @@ public class CandidatUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         new EditProfileUI().setVisible(true);
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
+        JDialog yourdialog = new aboutusJDialog(this, rootPaneCheckingEnabled);
+        yourdialog.setLocationRelativeTo(null);
+        yourdialog.setModal(true);
+        yourdialog.setVisible(true);
+    }//GEN-LAST:event_jLabel14MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new MesFavorisUI().setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
