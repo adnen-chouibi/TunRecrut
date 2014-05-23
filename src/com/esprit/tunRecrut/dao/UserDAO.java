@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,14 +46,33 @@ public class UserDAO {
         }
 
     }
-    
+
     public boolean changePasswordAdmin(String new_password) {
 
         try {
             String sql
-                    = "UPDATE  user set password='" +  MD5.md5Java(new_password) + "' WHERE is_super_admin=1";
+                    = "UPDATE  user set password='" + MD5.md5Java(new_password) + "' WHERE is_super_admin=1";
             System.out.println(sql);
             return crud.execute(sql);
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+
+    }
+
+    public boolean changePassword(String email, String new_password) {
+
+        try {
+            if (this.findUserByEmail(email)) {
+                String sql
+                        = "UPDATE  user set password='" + MD5.md5Java(new_password) + "' WHERE is_super_admin=1";
+                System.out.println(sql);
+                return crud.execute(sql);
+            } else {
+                JOptionPane.showMessageDialog(null, "Votre mail n'existe pas", "Erreur", 0, null);
+                return false;
+            }
         } catch (Exception e) {
             Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
             return false;
@@ -83,7 +103,6 @@ public class UserDAO {
                     user.setRaisonSocial(rs.getString("raison_social"));
                 }
                 user.setSuper_admin(rs.getBoolean("is_super_admin"));
-                    
 
             }
             return user;
@@ -93,7 +112,8 @@ public class UserDAO {
             return null;
         }
     }
- public User getSuperUser() {
+
+    public User getSuperUser() {
 
         RegionDAO region_dao = new RegionDAO();
         User user = null;
@@ -116,7 +136,6 @@ public class UserDAO {
                     user.setRaisonSocial(rs.getString("raison_social"));
                 }
                 user.setSuper_admin(rs.getBoolean("is_super_admin"));
-                    
 
             }
             return user;
@@ -126,6 +145,7 @@ public class UserDAO {
             return null;
         }
     }
+
     public boolean findUserByEmail(String email) {
 
         boolean trouve = false;
@@ -318,7 +338,7 @@ public class UserDAO {
             ResultSet rs = crud.exeRead(req);
             while (rs.next()) {
                 user = new User();
-                
+
                 user.setRegionId(region_dao.getRegionById(rs.getString("region_id")));
                 user.setNbUserByRegion(rs.getInt("nb"));
                 System.out.println(rs.getInt("nb"));
@@ -332,10 +352,26 @@ public class UserDAO {
 
         return users;
     }
-    
+
     public boolean isInUserCandidatures(int annonce_id) {
-        
-        return false;        
+
+        return false;
+    }
+
+    public boolean findUserByEmail(String email, Integer id) {
+        boolean trouve = false;
+        try {
+            String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND id != "+id+"";
+            ResultSet rs = crud.exeRead(sql);
+            while (rs.next()) {
+                trouve = true;
+            }
+            return trouve;
+
+        } catch (SQLException ex) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
     }
 
 }

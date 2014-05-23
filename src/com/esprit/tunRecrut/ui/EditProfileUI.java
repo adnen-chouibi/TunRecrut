@@ -40,6 +40,7 @@ public class EditProfileUI extends javax.swing.JFrame {
         else{
             raison.setText(user.getRaisonSocial());
         }
+        this.setLocationRelativeTo(null);
     }
 
     public void initRegion() {
@@ -77,8 +78,6 @@ public class EditProfileUI extends javax.swing.JFrame {
         email = new javax.swing.JTextField();
         Modifier = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         //final PlaceholderTextField fax = new PlaceholderTextField();
         //fax.setPlaceholder("Fax");

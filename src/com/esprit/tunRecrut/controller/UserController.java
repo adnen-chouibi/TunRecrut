@@ -39,9 +39,9 @@ public class UserController {
                 CandidatUI candidat_ui = new CandidatUI();
                 candidat_ui.setVisible(true);
             } else if (user.getType() == 2) {
-
-                CandidatUI candidat_ui = new CandidatUI();
-                candidat_ui.setVisible(true);
+                JOptionPane.showMessageDialog(null, "Go to home page enterprise");
+               // CandidatUI candidat_ui = new CandidatUI();
+               // candidat_ui.setVisible(true);
             }
 
         } else {
@@ -102,7 +102,7 @@ public class UserController {
     public void EditProfileAction(User user, JFrame edit_profile_ui) {
         UserDAO uDao = new UserDAO();
         Session connected_user = new Session();
-        if (uDao.findUserByEmail(user.getEmailAddress())) {
+        if (uDao.findUserByEmail(user.getEmailAddress(), user.getId())) {
             JOptionPane.showMessageDialog(null, user.getEmailAddress() + " Existe déja");
         } else {
             if (uDao.EditUser(user)) {

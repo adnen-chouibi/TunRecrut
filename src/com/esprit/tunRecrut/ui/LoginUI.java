@@ -10,18 +10,24 @@ import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserAdapter;
 import chrriis.dj.nativeswing.swtimpl.components.WebBrowserNavigationEvent;
 import com.esprit.tunRecrut.controller.UserController;
+import com.esprit.tunRecrut.dao.UserDAO;
 import com.esprit.tunRecrut.entities.User;
 import static com.esprit.tunRecrut.ui.Facebook.firstRequest;
 import static com.esprit.tunRecrut.ui.Facebook.firstRequestDone;
 import static com.esprit.tunRecrut.ui.Facebook.secondRequest;
 import static com.esprit.tunRecrut.ui.Facebook.secondRequestDone;
 import com.esprit.tunRecrut.util.GraphFacebookReader;
+import com.esprit.tunRecrut.util.Mail;
+import com.esprit.tunRecrut.util.MailConstruction;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URL;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -33,16 +39,16 @@ import javax.swing.text.html.parser.ParserDelegator;
  * @author app4mob
  */
 public class LoginUI extends javax.swing.JFrame {
-    
+
     public static String API_KEY = "151685701536934";
     public static String SECRET = "11a49176d272248561e985ea9f8d081f";
-    
+
     public static String firstRequest = "https://graph.facebook.com/oauth/authorize?"
             + "client_id="
             + API_KEY
             + "&redirect_uri=http://www.facebook.com/connect/login_success.html&"
             + "scope=publish_stream,offline_access,create_event,read_stream,email,user_birthday";
-    
+
     public static String secondRequest = "https://graph.facebook.com/oauth/access_token?"
             + "client_id="
             + API_KEY
@@ -53,6 +59,9 @@ public class LoginUI extends javax.swing.JFrame {
     public static boolean firstRequestDone = false;
     public static boolean secondRequestDone = false;
     public static JFrame currentFrame;
+    URL url;
+    Mail mail = new Mail();
+
     /**
      * Creates new form UserUI
      */
@@ -60,12 +69,17 @@ public class LoginUI extends javax.swing.JFrame {
         initComponents();
         NativeInterface.open();
         NativeInterface.initialize();
-        currentFrame  =this;
+        currentFrame = this;
         this.setLocationRelativeTo(null);
         System.out.println(System.getProperty("user.dir"));
         email.setText("adnen.chouibi@gmail.com");
         password.setText("2137");
-        
+        try {
+            url = new URL("http://www.test.com");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -175,6 +189,11 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Mot de passe oublier?");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -365,28 +384,28 @@ public class LoginUI extends javax.swing.JFrame {
                         StringReader readerSTR = new StringReader(webBrowser.getHTMLContent());
                         // Create a callback for html parser
                         HTMLEditorKit.ParserCallback callback
-                        = new HTMLEditorKit.ParserCallback() {
-                            @Override
-                            public void handleText(char[] data, int pos) {
-                                System.out.println(data);
-                                // because there is only one line with the access_token
-                                // in the html content you can parse it.
-                                String string = new String(data);
-                                String[] temp1 = string.split("&");
-                                String[] temp2 = temp1[0].split("=");
-                                // System.out.println("access tocken=" + temp2);
-                                // access_token = temp2[1];
-                                GraphFacebookReader.acces_token = temp2[1];
-                                if (GraphFacebookReader.fetchObject()) {
-                                    currentFrame.setVisible(false);
-                                    new CandidatUI().setVisible(true);
-                                }
-                                else{
-                                    currentFrame.setVisible(false);
-                                }
-                                //System.out.println(access_token);
-                            }
-                        };
+                                = new HTMLEditorKit.ParserCallback() {
+                                    @Override
+                                    public void handleText(char[] data, int pos) {
+                                        System.out.println(data);
+                                        // because there is only one line with the access_token
+                                        // in the html content you can parse it.
+                                        String string = new String(data);
+                                        String[] temp1 = string.split("&");
+                                        String[] temp2 = temp1[0].split("=");
+                                        // System.out.println("access tocken=" + temp2);
+                                        // access_token = temp2[1];
+                                        GraphFacebookReader.acces_token = temp2[1];
+                                        if (GraphFacebookReader.fetchObject()) {
+                                            currentFrame.setVisible(false);
+                                            new CandidatUI().setVisible(true);
+                                            authFrame.setVisible(false);
+                                        } else {
+                                            currentFrame.setVisible(false);
+                                        }
+                                        //System.out.println(access_token);
+                                    }
+                                };
                         try {
                             // Call the parse method
                             new ParserDelegator().parse(readerSTR, callback, false);
@@ -416,6 +435,69 @@ public class LoginUI extends javax.swing.JFrame {
         new LoginAdminUI().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        if (email.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Saisir votre E-mail ", "Erreur", 0, null);
+        } else {
+            Random generator = new Random();
+            int newpassword = generator.nextInt(9999 - 1000) + 1;
+            boolean isChanged = false;
+            isChanged = new UserDAO().changePassword(email.getText(), Integer.toString(newpassword));
+            if (isChanged) {
+                UserDAO userdao = new UserDAO();
+                User user = userdao.getSuperUser();
+                mail.setMailAddressRecipient(user.getEmailAddress());
+                mail.setPwd("estiesprit");
+                mail.setMailAddressSender("adnen07@gmail.com");
+                mail.setMailSubject("réinitialisation mot de passe tun recrut");
+
+                String msg = "Bonjour " + user.getFirstName() + " " + user.getLastName() + " !\n"
+                        + "\n"
+                        + "Pour réinitialiser votre mot de passe, Voila votre nouvelle mot de passe:\n"
+                        + "Passowrd: " + newpassword + "\n"
+                        + "\n"
+                        + "---\n"
+                        + "Cordialement,\n"
+                        + "Équipe Tun Recrut";
+
+                mail.setMailObject(msg);
+                System.out.println(newpassword);
+                String s;
+                MailConstruction mc = new MailConstruction();
+                mc.getMailProperties();
+                System.out.println(url.toString());
+                if (url.toString().equalsIgnoreCase("http://www.test.com")) {
+                    System.out.println("not equal" + url.toString());
+                    s = "";
+                } else {
+                    s = this.cleanUrl(url);
+                }
+
+                mc.getMailMessage(s, mail);
+                mc.SendMessage();
+
+                JOptionPane.showMessageDialog(null, "Votre nouveau mot de passe sera envoyé dans quelques instants à votre adresse e-mail ");
+            }
+        }
+
+    }//GEN-LAST:event_jLabel4MouseClicked
+    public String cleanUrl(URL url) {
+
+        String s = url.toString();
+        System.out.println("Before Clean");
+        System.out.println(s);
+        String delims = "/";
+        String[] tokens = s.split(delims);
+        System.out.println("After Clean");
+        String mailPart = "";
+        for (int i = 1; i < tokens.length; i++) {
+            mailPart += tokens[i] + "\\\\";
+        }
+        System.out.println(mailPart);
+        return mailPart;
+    }
 
     /**
      * @param args the command line arguments
