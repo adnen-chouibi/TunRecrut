@@ -359,6 +359,7 @@ public class UserDAO {
     }
 
     public boolean findUserByEmail(String email, Integer id) {
+        // connect
         boolean trouve = false;
         try {
             String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND id != "+id+"";
