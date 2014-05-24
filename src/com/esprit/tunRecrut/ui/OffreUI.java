@@ -25,6 +25,7 @@ import com.esprit.tunRecrut.ui.OffreModel;
 import com.esprit.tunRecrut.ui.administrateur.ListeOffreTable;
 import com.esprit.tunRecrut.util.Session;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -565,6 +566,11 @@ public class OffreUI extends javax.swing.JFrame {
         });
 
         jButton1.setText("Ajouter aux favoris");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -648,7 +654,7 @@ public class OffreUI extends javax.swing.JFrame {
         initLabels(offre_id.hashCode());
 
         if (evt.getClickCount() == 2) {
-           
+
             new OffreShowUI(candidat_id.hashCode());
         }
 
@@ -697,8 +703,28 @@ public class OffreUI extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         Object offre_id = jTable1.getValueAt(row, 0);
         GenererPDFAnnonce pdf = new GenererPDFAnnonce();
-        pdf.genratePDF(offre_id.hashCode());
+        try {
+            pdf.genratePDF(offre_id.hashCode());
+        } catch (IOException ex) {
+            Logger.getLogger(OffreUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_saveAsPdfButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        Object offre_id = jTable1.getValueAt(row, 0);
+        Session user = new Session();
+        UserDAO udao = new UserDAO();
+        if (udao.hasFav(offre_id.hashCode(), user.getUser().getId())) {
+            JOptionPane.showMessageDialog(null, "L'annonce existe déja dans la liste des favoris");
+        } else {
+            JOptionPane.showMessageDialog(null, "L'annonce est ajouté au votre favoris avec succées");
+            udao.addToBookmarks(offre_id.hashCode(), user.getUser().getId());
+        }
+        
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void initLabels(int offre_id) {
         AnnonceDAO annonce_dao = new AnnonceDAO();

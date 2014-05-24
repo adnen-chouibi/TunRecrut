@@ -461,7 +461,7 @@ public class OffreShowUI extends javax.swing.JFrame {
         telLabel.setText(annonce.getUserObject().getTel());
         faxLabel.setText(annonce.getUserObject().getFax());
         adresseLabel.setText(annonce.getUserObject().getAddress());
-        jLabelOffreTitle.setText(annonce.getUserObject().getAddress());
+        jLabelOffreTitle.setText(annonce.getName());
         raisonSocialLabel.setText(annonce.getUserObject().getRaisonSocial());
     }
 }

@@ -72,8 +72,8 @@ public class LoginUI extends javax.swing.JFrame {
         currentFrame = this;
         this.setLocationRelativeTo(null);
         System.out.println(System.getProperty("user.dir"));
-        email.setText("adnen.chouibi@gmail.com");
-        password.setText("2137");
+       // email.setText("adnen.chouibi@gmail.com");
+      //  password.setText("2137");
         try {
             url = new URL("http://www.test.com");
 

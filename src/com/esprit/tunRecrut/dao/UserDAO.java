@@ -362,7 +362,7 @@ public class UserDAO {
         // connect
         boolean trouve = false;
         try {
-            String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND id != "+id+"";
+            String sql = "SELECT * FROM user WHERE email_address = '" + email + "' AND id != " + id + "";
             ResultSet rs = crud.exeRead(sql);
             while (rs.next()) {
                 trouve = true;
@@ -375,4 +375,35 @@ public class UserDAO {
         }
     }
 
+    public boolean addToBookmarks(int annonce_id, int user_id) {
+        try {
+            String sql;
+            sql = "INSERT INTO user_has_favori (annonce_id, user_id) VALUES ('" + annonce_id + "', '" + user_id + "')";
+
+            return crud.execute(sql);
+
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return false;
+        }
+    }
+
+    public Boolean hasFav(int annonce_id, Integer user_id) {
+        try {
+            String sql;
+            sql = "SELECT COUNT(*) AS nbr FROM user_has_favori WHERE annonce_id = '" + annonce_id + "' AND user_id = '" + user_id + "'";
+            System.out.println(sql);
+            ResultSet rs = crud.exeRead(sql);
+            Boolean bool = false;
+            while (rs.next()) {
+                if (rs.getInt("nbr") > 0)
+                    bool = true;
+            }
+            return bool;
+
+        } catch (Exception e) {
+            Logger.getLogger("Client controller").log(Level.SEVERE, " fail");
+            return true;
+        }
+    }
 }
